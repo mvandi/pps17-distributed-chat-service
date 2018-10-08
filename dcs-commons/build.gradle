@@ -6,6 +6,8 @@ dependencies {
     compile group: 'io.vertx', name: 'vertx-lang-scala_2.12', version: vertxVersion
     compile group: 'io.vertx', name: 'vertx-rx-java', version: vertxVersion
     compile group: 'io.vertx', name: 'vertx-web-scala_2.12', version: vertxVersion
+    compile group: 'io.vertx', name: 'vertx-hazelcast', version: vertxVersion
+
     compile group: 'io.reactivex', name: 'rxscala_2.12', version: rxScalaVersion
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-io

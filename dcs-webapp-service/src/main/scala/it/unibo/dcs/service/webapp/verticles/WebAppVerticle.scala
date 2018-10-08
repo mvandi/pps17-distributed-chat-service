@@ -46,24 +46,27 @@ final class WebAppVerticle extends ServiceVerticle {
   override protected def initializeRouter(router: Router): Unit = {
     // To fetch request bodies
     router.route().handler(BodyHandler.create())
+    val apiRouter = Router.router(vertx)
 
     implicit val ctx: core.Context = this.ctx
 
-    router.post("/register")
+    apiRouter.post("/register")
       .consumes("application/json")
       .produces("application/json")
       .handler(context => requestHandler handleRegistration context)
 
 
-    router.post("/login")
+    apiRouter.post("/login")
       .consumes("application/json")
       .produces("application/json")
       .handler(context => requestHandler handleLogin context)
 
 
-    router.post("/protected/logout")
+    apiRouter.post("/protected/logout")
       .consumes("application/json")
       .handler(context => requestHandler handleLogout context)
+
+    router.mountSubRouter("/api", apiRouter)
   }
 
   override def start(): Unit = {

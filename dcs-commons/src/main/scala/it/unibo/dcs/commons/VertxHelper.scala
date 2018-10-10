@@ -1,8 +1,13 @@
 package it.unibo.dcs.commons
 
-import io.vertx.core.{AsyncResult, Future, Handler}
+import java.nio.charset.StandardCharsets
+
+import io.vertx.core.json.JsonObject
+import io.vertx.core.{AsyncResult, Future, Handler, Context => JContext, Vertx => JVertx}
+import io.vertx.scala.core.{Context, Vertx}
 import it.unibo.dcs.commons.RxHelper.Implicits.RxObservable
 import it.unibo.dcs.commons.VertxHelper.Implicits._
+import org.apache.commons.io.IOUtils
 import rx.lang.scala.Observable
 
 import scala.util.{Failure, Success, Try}
@@ -17,7 +22,17 @@ object VertxHelper {
     RxObservable[J](javaObservable).map[S](converter)
   }
 
+  def readJsonObject(file: String): JsonObject = {
+    val in = getClass.getResourceAsStream(file)
+    val str = IOUtils.toString(in, StandardCharsets.UTF_8)
+    new JsonObject(str)
+  }
+
   object Implicits {
+
+    implicit def vertxToJVertx(vertx: Vertx): JVertx = vertx.asJava.asInstanceOf[JVertx]
+
+    implicit def contextToJContext(context: Context): JContext = context.asJava.asInstanceOf[JContext]
 
     implicit def handlerToFunction[T](handler: Handler[T]): Function[T, Unit] = handler.handle
 

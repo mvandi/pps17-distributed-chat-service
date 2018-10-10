@@ -3,6 +3,10 @@ package it.unibo.dcs.service.user
 import java.util.Date
 
 import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExecutor}
+import it.unibo.dcs.service.user.interactor.CreateUserUseCase
+import it.unibo.dcs.service.user.model.User
+import it.unibo.dcs.service.user.repository.UserRepository
+import it.unibo.dcs.service.user.request.CreateUserRequest
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.FlatSpec
 import rx.lang.scala.{Observable, Subscriber}

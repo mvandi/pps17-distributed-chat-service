@@ -1,0 +1,12 @@
+.chat-wrapper {
+    position:inherit;
+    margin: 0 0 0 250px;
+    padding: 0;
+    border-left:1px solid #e7e7e7
+}
+.footer_fixed footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

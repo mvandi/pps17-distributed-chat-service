@@ -1,9 +1,9 @@
 package it.unibo.dcs.commons
 
-import io.vertx.core.{Context => JContext, Vertx => JVertx}
 import io.vertx.rx.java.{RxHelper => JRxHelper}
 import io.vertx.scala.core.{Context, Vertx}
 import it.unibo.dcs.commons.RxHelper.Implicits._
+import it.unibo.dcs.commons.VertxHelper.Implicits._
 import rx.lang.scala.{Observable, Scheduler}
 
 object RxHelper {
@@ -17,10 +17,6 @@ object RxHelper {
   private val DEFAULT_ORDERED: Boolean = false
 
   private[commons] object Implicits {
-
-    implicit def vertxToJVertx(vertx: Vertx): JVertx = vertx.asJava.asInstanceOf[JVertx]
-
-    implicit def contextToJContext(context: Context): JContext = context.asJava.asInstanceOf[JContext]
 
     implicit final class RxScheduler(val asJavaScheduler: rx.Scheduler) extends Scheduler
 

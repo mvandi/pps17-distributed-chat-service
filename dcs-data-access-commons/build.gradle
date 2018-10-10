@@ -6,4 +6,5 @@ dependencies {
     compile project(':dcs-commons')
 
     compile group:'io.vertx', name: 'vertx-jdbc-client-scala_2.12', version: vertxVersion
+    compile group: 'mysql', name: 'mysql-connector-java', version: mysqlConnectorVersion
 }

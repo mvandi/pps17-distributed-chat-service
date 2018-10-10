@@ -1,10 +1,10 @@
 package it.unibo.dcs.commons
 
 import java.text.SimpleDateFormat
-import java.util.{Date, Locale}
+import java.util.Date
 
 package object dataaccess {
-  private val mySqlFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+  private val mySqlFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
 
   object Implicits {
 
@@ -12,5 +12,11 @@ package object dataaccess {
 
     implicit def stringToDate(date: String): Date = mySqlFormat.parse(date)
 
+    implicit def stringToBoolean(value: String): Boolean = if (value == "0")
+      true
+    else
+      false
+
   }
+
 }

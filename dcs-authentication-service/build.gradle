@@ -6,9 +6,27 @@
 dependencies {
     compile project(':dcs-commons')
     compile project(':dcs-service-commons')
+    compile project(':dcs-data-access-commons')
+    compile project(':dcs-interactor-commons')
 
-    compile group: 'io.vertx', name: 'vertx-lang-scala_2.12', version: vertxVersion
-    compile group: 'io.vertx', name: 'vertx-web-scala_2.12', version: vertxVersion
     compile group: 'io.vertx', name: 'vertx-auth-jwt-scala_2.12', version: vertxVersion
-    testCompile group: 'org.scalatest', name: 'scalatest_2.12', version: scalaTestVersion
+
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.cz.augi:gradle-wartremover:0.9.4"
+    }
+}
+
+apply plugin: "cz.augi.gradle.wartremover"
+
+wartremover {
+    warningWarts.remove("NonUnitStatements")
+    warningWarts.remove("Var")
 }

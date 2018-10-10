@@ -3,12 +3,16 @@ package it.unibo.dcs.service.user
 import java.util.Date
 
 import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExecutor}
+import it.unibo.dcs.service.user.interactor.GetUserUseCase
+import it.unibo.dcs.service.user.model.User
+import it.unibo.dcs.service.user.repository.UserRepository
+import it.unibo.dcs.service.user.request.GetUserRequest
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.FlatSpec
 import rx.lang.scala.{Observable, Subscriber}
 
 class GetUserUseCaseTest extends FlatSpec with MockFactory {
-  val request = "martynha"
+  val request = GetUserRequest("martynha")
   val expectedUser = User("martynha", "Martina", "Magnani", "", true, new Date())
 
   val threadExecutor: ThreadExecutor = mock[ThreadExecutor]

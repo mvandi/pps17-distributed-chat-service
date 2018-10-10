@@ -1,9 +1,7 @@
 package it.unibo.dcs.service.webapp
 
 import io.vertx.scala.ext.web.Router
-import io.vertx.servicediscovery.ServiceDiscovery
-import it.unibo.dcs.commons.service.{HttpEndpointDiscovery, HttpEndpointDiscoveryImpl, ServiceVerticle}
-import it.unibo.dcs.service.webapp.repositories.datastores.api.AuthenticationRestApi
+import it.unibo.dcs.commons.service.ServiceVerticle
 
 final class WebappVerticle extends ServiceVerticle {
 

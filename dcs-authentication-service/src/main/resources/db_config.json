@@ -1,6 +1,6 @@
 {
-    "url": "mysql6.gear.host",
-    "driver_class": "com.mysql.jdbc.Driver",
+    "url": "jdbc:mysql://mysql6.gear.host/authservice",
+    "driver_class": "com.mysql.cj.jdbc.Driver",
     "user": "authservice",
     "password": "teddy_95"
 }

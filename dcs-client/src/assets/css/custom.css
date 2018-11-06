@@ -26,7 +26,7 @@ html, body {
 }
 
 i.material-icons.close-link {
-  padding-left: 35% !important;
+  margin-left: auto !important;
 }
 
 .participants-number {

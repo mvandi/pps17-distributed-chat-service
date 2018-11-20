@@ -1,6 +1,7 @@
 package it.unibo.dcs.service.authentication.data
 
 import java.util.Date
+
 import rx.lang.scala.Observable
 
 /** Structure that allows access to authentication info by many possible different means

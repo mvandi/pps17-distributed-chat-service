@@ -1,8 +1,8 @@
 package it.unibo.dcs.commons.validation
 
-import org.scalatest.FlatSpec
+import it.unibo.dcs.commons.test.JUnitSpec
 
-final class ValidatorTest extends FlatSpec {
+final class ValidatorSpec extends JUnitSpec {
 
   val validator: Validator[String] = Validator[String] { _
     .addRule(_ != null, new NullPointerException("string is null"))

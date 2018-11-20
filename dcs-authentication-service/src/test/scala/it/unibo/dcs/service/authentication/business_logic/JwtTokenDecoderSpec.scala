@@ -1,9 +1,9 @@
 package it.unibo.dcs.service.authentication.business_logic
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 
-class JwtTokenDecoderTest extends FlatSpec with MockFactory {
+class JwtTokenDecoderSpec extends JUnitSpec with MockFactory {
 
   private  val username = "ale"
   private  val token = "header.eyJzdWIiOiAiYWxlIn0=.signature"

@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { ChatComponent } from './chat.component';
-import { RoomComponent } from './room/room.component';
-import { BlankComponent } from './blank/blank.component';
-import { AddRoomComponent } from './add-room/add-room.component';
-import { RoomInfoComponent } from './room-info/room-info.component';
-import { EditProfileComponent } from "./edit-profile/edit-profile.component";
-import { UserProfileComponent } from "./user-profile/user-profile.component";
+import {ChatComponent} from './chat.component';
+import {RoomComponent} from './room/room.component';
+import {BlankComponent} from './blank/blank.component';
+import {AddRoomComponent} from './add-room/add-room.component';
+import {RoomInfoComponent} from './room-info/room-info.component';
+import {EditProfileComponent} from "./edit-profile/edit-profile.component";
+import {UserProfileComponent} from "./user-profile/user-profile.component";
 
 const routes: Routes = [{
     path: '',

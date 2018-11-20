@@ -1,15 +1,16 @@
 package it.unibo.dcs.service.authentication.data
 
 import java.util.Date
+
 import io.vertx.lang.scala.json.{Json, JsonArray}
 import io.vertx.scala.ext.sql.SQLConnection
+import it.unibo.dcs.commons.test.JUnitSpec
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 import rx.lang.scala.Subscriber
 
 import scala.language.postfixOps
 
-class AuthenticationDataStoreSpec extends FlatSpec with MockFactory {
+class AuthenticationDataStoreSpec extends JUnitSpec with MockFactory {
 
   private val username = "ale"
   private val password = "123"

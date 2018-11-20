@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject, timer} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {EventBusService} from './event-bus.service';
-import {Participation, Room, Message} from '../model';
+import {Message, Participation, Room} from '../model';
 import {
   CreateRoomRequest,
   DeleteRoomRequest,

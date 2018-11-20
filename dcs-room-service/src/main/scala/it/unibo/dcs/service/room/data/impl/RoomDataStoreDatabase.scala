@@ -5,8 +5,6 @@ import io.vertx.scala.ext.sql.SQLConnection
 import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
 import it.unibo.dcs.commons.dataaccess.DataStoreDatabase
 import it.unibo.dcs.commons.dataaccess.Implicits.dateToString
-import it.unibo.dcs.commons.dataaccess.ResultSetHelper.foldResult
-import it.unibo.dcs.commons.dataaccess.{DataStoreDatabase, ResultSetHelper}
 import it.unibo.dcs.commons.dataaccess.ResultSetHelper.Implicits.RichResultSet
 import it.unibo.dcs.commons.dataaccess.ResultSetHelper.foldResult
 import it.unibo.dcs.exceptions.{ParticipationNotFoundException, ParticipationsNotFoundException, RoomNotFoundException}

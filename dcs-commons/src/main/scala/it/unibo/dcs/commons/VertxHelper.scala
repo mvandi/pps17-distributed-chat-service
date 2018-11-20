@@ -4,6 +4,7 @@ import io.vertx.core.eventbus.{MessageCodec, EventBus => JEventBus}
 import io.vertx.core.{AsyncResult, Future, Handler, Context => JContext, Vertx => JVertx}
 import io.vertx.scala.core.eventbus.EventBus
 import io.vertx.scala.core.{Context, Vertx}
+import it.unibo.dcs.commons.ReflectionHelper.asClassOf
 import it.unibo.dcs.commons.RxHelper.Implicits.RxObservable
 import it.unibo.dcs.commons.VertxHelper.Implicits.handlerToFunction
 import rx.lang.scala.Observable
@@ -12,9 +13,6 @@ import scala.collection.mutable
 import scala.language.implicitConversions
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try}
-import ReflectionHelper.asClassOf
-
-import scala.language.implicitConversions
 
 object VertxHelper {
 

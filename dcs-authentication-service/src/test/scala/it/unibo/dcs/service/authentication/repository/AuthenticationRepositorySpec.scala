@@ -2,14 +2,14 @@ package it.unibo.dcs.service.authentication.repository
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.authentication.data.AuthenticationDataStore
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
 
-class AuthenticationRepositorySpec extends FlatSpec with MockFactory {
+class AuthenticationRepositorySpec extends JUnitSpec with MockFactory {
 
   val username = "ale"
   val password = "123"

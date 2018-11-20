@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ChatService } from '../../service/chat.service';
-import { Router } from '@angular/router';
-import { remove } from 'lodash';
+import {Component, OnInit} from '@angular/core';
+import {ChatService} from '../../service/chat.service';
+import {Router} from '@angular/router';
+import {remove} from 'lodash';
 
-import { Room, Participation } from '../../model';
-import { AuthService } from '../../service/auth.service';
+import {Participation, Room} from '../../model';
+import {AuthService} from '../../service/auth.service';
 
-import { filter } from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-rooms',

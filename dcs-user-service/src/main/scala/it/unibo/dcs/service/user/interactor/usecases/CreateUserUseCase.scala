@@ -1,8 +1,6 @@
 package it.unibo.dcs.service.user.interactor.usecases
 
-import io.vertx.scala.core.Context
-import it.unibo.dcs.commons.RxHelper
-import it.unibo.dcs.commons.interactor.{ThreadExecutorExecutionContext, UseCase}
+import it.unibo.dcs.commons.interactor.UseCase
 import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExecutor}
 import it.unibo.dcs.service.user.interactor.validations.ValidateUserCreation
 import it.unibo.dcs.service.user.model.User

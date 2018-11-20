@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { RegisterRequest } from '../requests';
-import { AuthService } from '../service/auth.service';
-import { Toast } from "../toast-notify";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {RegisterRequest} from '../requests';
+import {AuthService} from '../service/auth.service';
+import {Toast} from "../toast-notify";
 
 @Component({
   selector: 'app-register',

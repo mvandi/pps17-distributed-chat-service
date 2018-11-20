@@ -1,17 +1,17 @@
 package it.unibo.dcs.service.authentication.interactor
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.MocksForUseCases.{authRepository, postExecutionThread, threadExecutor}
 import it.unibo.dcs.service.authentication.interactor.usecases.CheckTokenUseCase
 import it.unibo.dcs.service.authentication.interactor.validations.CheckTokenValidation
 import it.unibo.dcs.service.authentication.request.Requests.CheckTokenRequest
 import it.unibo.dcs.service.authentication.validator.CheckTokenValidator
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
 
-class CheckTokenUseCaseSpec extends FlatSpec with MockFactory {
+class CheckTokenUseCaseSpec extends JUnitSpec with MockFactory {
 
   private val username = "ale"
   private val token = "header.eyJzdWIiOiAiYWxlIn0=.signature"

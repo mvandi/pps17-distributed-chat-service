@@ -2,15 +2,16 @@ package it.unibo.dcs.service.room.repository
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.room.Mocks._
-import it.unibo.dcs.service.room.model.{Message, Room, Participation}
+import it.unibo.dcs.service.room.model.{Message, Participation, Room}
 import it.unibo.dcs.service.room.repository.impl.RoomRepositoryImpl
 import it.unibo.dcs.service.room.request._
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 import rx.lang.scala.{Observable, Subscriber}
 
-final class RoomRepositorySpec extends FlatSpec with MockFactory with OneInstancePerTest {
+final class RoomRepositorySpec extends JUnitSpec with MockFactory with OneInstancePerTest {
 
   private val roomRepository = new RoomRepositoryImpl(roomDataStore)
 

@@ -15,11 +15,7 @@ subprojects {
     dependencies {
         compile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
 
-        testCompile group: 'io.vertx', name: 'vertx-unit', version: vertxVersion
-        testCompile group: 'org.scalacheck', name: 'scalacheck_2.12', version: scalaCheckVersion
-        testCompile group: 'org.scalatest', name: 'scalatest_2.12', version: scalaTestVersion
-        testCompile group: 'org.scalamock', name: 'scalamock_2.12', version: scalaMockVersion
-
+        testCompile project(':dcs-test-commons')
         testRuntime group: 'org.xerial', name: 'sqlite-jdbc', version: sqliteVersion
     }
 }

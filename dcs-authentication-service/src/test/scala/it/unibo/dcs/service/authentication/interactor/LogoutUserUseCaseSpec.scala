@@ -1,17 +1,17 @@
 package it.unibo.dcs.service.authentication.interactor
 
-import it.unibo.dcs.service.MocksForUseCases._
+import _root_.it.unibo.dcs.commons.test.JUnitSpec
 import _root_.it.unibo.dcs.service.authentication.interactor.usecases.LogoutUserUseCase
-import _root_.it.unibo.dcs.service.authentication.request.Requests.LogoutUserRequest
 import _root_.it.unibo.dcs.service.authentication.interactor.validations.LogoutUserValidation
+import _root_.it.unibo.dcs.service.authentication.request.Requests.LogoutUserRequest
 import _root_.it.unibo.dcs.service.authentication.validator.LogoutUserValidator
+import it.unibo.dcs.service.MocksForUseCases._
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
 
-class LogoutUserUseCaseSpec extends FlatSpec with MockFactory {
+class LogoutUserUseCaseSpec extends JUnitSpec with MockFactory {
 
   private val username = "ale"
   private val token = "header.eyJzdWIiOiAiYWxlIn0=.signature"

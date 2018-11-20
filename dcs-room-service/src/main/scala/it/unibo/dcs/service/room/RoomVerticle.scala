@@ -7,8 +7,8 @@ import io.vertx.lang.scala.json.JsonObject
 import io.vertx.scala.ext.web.Router
 import io.vertx.scala.ext.web.handler.BodyHandler
 import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
-import it.unibo.dcs.commons.VertxWebHelper.getParam
 import it.unibo.dcs.commons.VertxWebHelper.Implicits.contentTypeToString
+import it.unibo.dcs.commons.VertxWebHelper.getParam
 import it.unibo.dcs.commons.interactor.ThreadExecutorExecutionContext
 import it.unibo.dcs.commons.interactor.executor.PostExecutionThread
 import it.unibo.dcs.commons.service.{HttpEndpointPublisher, ServiceVerticle}

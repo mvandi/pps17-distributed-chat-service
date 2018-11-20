@@ -2,9 +2,9 @@ package it.unibo.dcs.service.webapp.model
 
 import java.util.Date
 
-import io.vertx.lang.scala.json.{Json, JsonObject}
-import it.unibo.dcs.service.webapp.gson
+import io.vertx.lang.scala.json.JsonObject
 import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
+import it.unibo.dcs.service.webapp.gson
 
 import scala.language.implicitConversions
 

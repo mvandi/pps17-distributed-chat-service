@@ -2,7 +2,6 @@ package it.unibo.dcs.service.webapp.usecases
 
 import it.unibo.dcs.service.webapp.interaction.Requests.RegisterUserRequest
 import it.unibo.dcs.service.webapp.interaction.Results.RegisterResult
-import it.unibo.dcs.service.webapp.repositories.{RoomRepository, UserRepository}
 import it.unibo.dcs.service.webapp.usecases.commons.Mocks._
 import it.unibo.dcs.service.webapp.usecases.commons.UseCaseSpec
 import rx.lang.scala.{Observable, Subscriber}

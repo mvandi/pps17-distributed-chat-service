@@ -1,6 +1,5 @@
 package it.unibo.dcs.service.webapp.verticles.handler.impl.subscribers
 
-import io.vertx.lang.scala.json.JsonArray
 import io.vertx.scala.core.http.HttpServerResponse
 import it.unibo.dcs.commons.VertxWebHelper.Implicits.RichHttpServerResponse
 import it.unibo.dcs.commons.logging.Logging

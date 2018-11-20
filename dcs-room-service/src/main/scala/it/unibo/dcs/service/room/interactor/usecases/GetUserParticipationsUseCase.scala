@@ -2,10 +2,10 @@ package it.unibo.dcs.service.room.interactor.usecases
 
 import it.unibo.dcs.commons.interactor.UseCase
 import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExecutor}
-import it.unibo.dcs.service.room.interactor.validations.{GetRoomsValidation, GetUserParticipationsValidation}
+import it.unibo.dcs.service.room.interactor.validations.GetUserParticipationsValidation
 import it.unibo.dcs.service.room.model.Room
 import it.unibo.dcs.service.room.repository.RoomRepository
-import it.unibo.dcs.service.room.request.{GetRoomsRequest, GetUserParticipationsRequest}
+import it.unibo.dcs.service.room.request.GetUserParticipationsRequest
 import rx.lang.scala.Observable
 
 final class GetUserParticipationsUseCase(threadExecutor: ThreadExecutor, postExecutionThread: PostExecutionThread,

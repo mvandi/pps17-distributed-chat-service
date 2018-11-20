@@ -1,17 +1,18 @@
 package it.unibo.dcs.service.room.interactor
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.room.Mocks._
 import it.unibo.dcs.service.room.interactor.usecases.DeleteRoomUseCase
 import it.unibo.dcs.service.room.interactor.validations.DeleteRoomValidation
 import it.unibo.dcs.service.room.request.DeleteRoomRequest
 import it.unibo.dcs.service.room.validator.DeleteRoomValidator
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
 
-final class DeleteRoomUseCaseSpec extends FlatSpec with MockFactory with OneInstancePerTest {
+final class DeleteRoomUseCaseSpec extends JUnitSpec with MockFactory with OneInstancePerTest {
 
   private val deleteRoomUseCase = {
     val validation = DeleteRoomValidation(threadExecutor, postExecutionThread, DeleteRoomValidator())

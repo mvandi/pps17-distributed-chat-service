@@ -2,17 +2,17 @@ package it.unibo.dcs.service.user.interactor
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.user.Mocks._
 import it.unibo.dcs.service.user.interactor.usecases.GetUserUseCase
 import it.unibo.dcs.service.user.model.User
 import it.unibo.dcs.service.user.request.GetUserRequest
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
 
-class GetUserUseCaseSpec extends FlatSpec with MockFactory {
+class GetUserUseCaseSpec extends JUnitSpec with MockFactory {
 
   private val request = GetUserRequest("martyha")
   private val expectedUser = User(request.username, "Martina", "Magnani", "", visible = true, new Date())

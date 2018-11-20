@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ChatService } from 'src/app/service/chat.service';
-import { filter } from 'rxjs/operators';
-import { AuthService } from 'src/app/service/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {ChatService} from 'src/app/service/chat.service';
+import {filter} from 'rxjs/operators';
+import {AuthService} from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-sidebar',

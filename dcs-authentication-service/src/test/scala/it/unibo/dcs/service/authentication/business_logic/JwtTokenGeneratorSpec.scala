@@ -4,11 +4,11 @@ import java.util.Date
 
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.ext.auth.jwt.JWTAuth
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.authentication.server.setupHelpers.createJwtAuthOptions
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 
-class JwtTokenGeneratorTest extends FlatSpec with MockFactory {
+class JwtTokenGeneratorSpec extends JUnitSpec with MockFactory {
 
   private val username = "ale"
   private val tokenDecoder = JwtTokenDecoder()

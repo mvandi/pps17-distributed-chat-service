@@ -1,6 +1,7 @@
 package it.unibo.dcs.service.authentication.business_logic
 
 import java.util.Date
+
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.ext.auth.jwt.{JWTAuth, JWTOptions}
 

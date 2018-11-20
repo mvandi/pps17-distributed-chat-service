@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import { Observable, Subject } from 'rxjs';
-import { User } from '../model';
-import { EditProfileRequest } from '../requests';
-import { EventBusService } from './event-bus.service';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {AuthService} from './auth.service';
+import {Observable, Subject} from 'rxjs';
+import {User} from '../model';
+import {EditProfileRequest} from '../requests';
+import {EventBusService} from './event-bus.service';
 
 @Injectable({
   providedIn: 'root'

@@ -5,7 +5,7 @@
  * Forked from: https://gist.github.com/benorama/93373c3c1c3574732d6cc1b4754aab9f
  */
 
-import { EventEmitter, Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import * as SockJS from 'sockjs-client';
 
 @Injectable()

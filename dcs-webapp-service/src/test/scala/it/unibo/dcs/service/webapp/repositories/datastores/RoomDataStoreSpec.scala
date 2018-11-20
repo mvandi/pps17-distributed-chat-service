@@ -1,10 +1,7 @@
 package it.unibo.dcs.service.webapp.repositories.datastores
 
-import java.util.Date
-
 import it.unibo.dcs.service.webapp.interaction.Requests._
 import it.unibo.dcs.service.webapp.model.{Message, Participation, Room}
-import it.unibo.dcs.service.webapp.repositories.datastores.RoomDataStore
 import it.unibo.dcs.service.webapp.repositories.datastores.api.RoomApi
 import it.unibo.dcs.service.webapp.repositories.datastores.commons.DataStoreSpec
 import it.unibo.dcs.service.webapp.repositories.datastores.impl.RoomDataStoreNetwork

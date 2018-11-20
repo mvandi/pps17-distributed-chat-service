@@ -2,7 +2,7 @@ package it.unibo.dcs.service.user.interactor
 
 import java.util.Date
 
-import it.unibo.dcs.commons.validation.Validator
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.user.Mocks._
 import it.unibo.dcs.service.user.interactor.usecases.CreateUserUseCase
 import it.unibo.dcs.service.user.interactor.validations.ValidateUserCreation
@@ -10,12 +10,11 @@ import it.unibo.dcs.service.user.model.User
 import it.unibo.dcs.service.user.request.{CreateUserRequest, GetUserRequest}
 import it.unibo.dcs.service.user.validator.UserCreationValidator
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
 
-class CreateUserUseCaseSpec extends FlatSpec with MockFactory {
+class CreateUserUseCaseSpec extends JUnitSpec with MockFactory {
 
   private val request = CreateUserRequest("martynha", "Martina", "Magnani")
   private val expectedUser = User(request.username, request.firstName, request.lastName, "", visible = true, new Date())

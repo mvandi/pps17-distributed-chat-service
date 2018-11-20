@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ChatService } from 'src/app/service/chat.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ChatService} from 'src/app/service/chat.service';
 import {filter, throttle} from 'rxjs/operators';
 import {fromEvent, interval, Subscription} from "rxjs";
 import {AuthService} from "../../service/auth.service";

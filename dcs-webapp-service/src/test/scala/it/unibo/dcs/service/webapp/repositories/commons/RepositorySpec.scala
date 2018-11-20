@@ -2,15 +2,16 @@ package it.unibo.dcs.service.webapp.repositories.commons
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.webapp.interaction.Requests.{EditUserRequest, RegisterUserRequest}
 import it.unibo.dcs.service.webapp.model.{Message, Participation, Room, User}
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 
 /**
   * Abstract class that encapsulates the objects used by more than one Repository test.
   */
-abstract class RepositorySpec extends FlatSpec with MockFactory with OneInstancePerTest {
+abstract class RepositorySpec extends JUnitSpec with MockFactory with OneInstancePerTest {
 
   /** ----------------- Model instances ---------------------------------------------------- */
   /** Users */

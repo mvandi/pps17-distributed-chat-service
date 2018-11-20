@@ -3,8 +3,6 @@ package it.unibo.dcs.commons.dataaccess
 import io.vertx.lang.scala.json.JsonObject
 import io.vertx.scala.ext.sql.ResultSet
 
-import scala.collection.mutable
-
 object ResultSetHelper {
 
   def foldResult[T](whenEmpty: => T)(f: ResultSet => T): ResultSet => T = resultSet =>

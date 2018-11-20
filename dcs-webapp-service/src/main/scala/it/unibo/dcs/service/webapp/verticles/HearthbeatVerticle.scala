@@ -8,7 +8,7 @@ import it.unibo.dcs.commons.VertxHelper.Implicits.RichEventBus
 import it.unibo.dcs.commons.service.ServiceVerticle
 import it.unibo.dcs.exceptions.UsernameRequiredException
 import it.unibo.dcs.service.webapp.verticles.Addresses.{internal, users}
-import it.unibo.dcs.service.webapp.verticles.HearthbeatVerticle.{KEY_USERNAME, KEY_ONLINE, TIMEOUT, usernameHandler}
+import it.unibo.dcs.service.webapp.verticles.HearthbeatVerticle.{KEY_ONLINE, KEY_USERNAME, TIMEOUT, usernameHandler}
 
 final class HearthbeatVerticle extends ServiceVerticle {
 

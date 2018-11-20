@@ -2,17 +2,18 @@ package it.unibo.dcs.service.user.repository
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.user.Mocks._
 import it.unibo.dcs.service.user.model.User
 import it.unibo.dcs.service.user.repository.impl.UserRepositoryImpl
 import it.unibo.dcs.service.user.request.{CreateUserRequest, EditUserRequest, GetUserRequest}
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
 
-class UserRepositorySpec extends FlatSpec with MockFactory with OneInstancePerTest {
+class UserRepositorySpec extends JUnitSpec with MockFactory with OneInstancePerTest {
 
   private val createUserRequest = CreateUserRequest("martynha", "Martina", "Magnani")
   private val getUserRequest = GetUserRequest(createUserRequest.username)

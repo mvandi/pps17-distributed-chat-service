@@ -2,6 +2,7 @@ package it.unibo.dcs.service.room.interactor
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.room.Mocks._
 import it.unibo.dcs.service.room.interactor.usecases.JoinRoomUseCase
 import it.unibo.dcs.service.room.interactor.validations.JoinRoomValidation
@@ -9,12 +10,12 @@ import it.unibo.dcs.service.room.model.{Participation, Room}
 import it.unibo.dcs.service.room.request.JoinRoomRequest
 import it.unibo.dcs.service.room.validator.JoinRoomValidator
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
 
-final class JoinRoomUseCaseSpec extends FlatSpec with MockFactory with OneInstancePerTest {
+final class JoinRoomUseCaseSpec extends JUnitSpec with MockFactory with OneInstancePerTest {
 
   private val joinRoomUseCase = {
     val validation = JoinRoomValidation(threadExecutor, postExecutionThread, JoinRoomValidator())

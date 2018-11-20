@@ -6,7 +6,6 @@ import io.vertx.core.http.HttpHeaders
 import io.vertx.core.http.HttpMethod._
 import io.vertx.lang.scala.json.{Json, JsonArray, JsonObject}
 import io.vertx.scala.core.http.HttpServerResponse
-import io.vertx.scala.ext.web.{Router, RoutingContext}
 import io.vertx.scala.ext.web.client.HttpResponse
 import io.vertx.scala.ext.web.handler.CorsHandler
 import io.vertx.scala.ext.web.{Router, RoutingContext}

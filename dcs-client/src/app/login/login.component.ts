@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../service/auth.service';
-import { LoginRequest } from '../requests';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '../service/auth.service';
+import {LoginRequest} from '../requests';
 import {Toast} from "../toast-notify";
 
 @Component({

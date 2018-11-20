@@ -2,6 +2,7 @@ package it.unibo.dcs.service.room.interactor
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.room.Mocks.{postExecutionThread, roomRepository, threadExecutor}
 import it.unibo.dcs.service.room.interactor.usecases.SendMessageUseCase
 import it.unibo.dcs.service.room.interactor.validations.SendMessageValidation
@@ -9,10 +10,10 @@ import it.unibo.dcs.service.room.model.{Message, Room}
 import it.unibo.dcs.service.room.request.SendMessageRequest
 import it.unibo.dcs.service.room.validator.SendMessageValidator
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 import rx.lang.scala.{Observable, Subscriber}
 
-class SendMessageUseCaseSpec extends FlatSpec with MockFactory with OneInstancePerTest {
+class SendMessageUseCaseSpec extends JUnitSpec with MockFactory with OneInstancePerTest {
 
   private val username = "martynha"
   private val roomName = "Test room"

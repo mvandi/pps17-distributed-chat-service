@@ -1,0 +1,219 @@
+\chapter{Retrospettiva}
+
+\section{Processo di sviluppo}
+
+Il lavoro è stato organizzato secondo le filosofie della metodologia Agile, adottando un approccio \textit{Scrum-like}.
+%
+Non dispondendo della figura dello scrum manager il team si è autorganizzato e autogestito per la definizione dei task da portare a termine negli Sprint settimanai e per la loro distrubuzione tra i membri.
+
+Al termine di ogni Sprint i componenti hanno preso parte a un meeting, durante il quale sono state poste in atto le fasi di \textit{Sprint Review} (per valutare il risultato dello Sprint e stabilire le priorità delle prossime feature da portare a termine) e di \textit{Sprint Retrospective} (per analizzare il processo di sviluppo allo scopo di migliorare la produttività del team).
+
+Il codice è stato sviluppato usando tecniche di \textit{Test-Driven-Development} (TDD).
+
+Per aiutarci nella pianificazione degli Sprint settimanali abbiamo utilizzato \textit{Google Sheets} per tenere traccia sia del product backlog complessivo sia del product backlog degli Sprint settimanali.
+%
+Abbiamo utilizzato \textit{Trello} per tracciare l'andamento dei task asseganti.
+
+\section{Andamento degli Sprint}
+
+\subsection{Sprint 1}
+
+Le funzionalità che ci siamo prefissi di sviluppare all'interno di questo Sprint sono:
+
+\begin{itemize}
+%
+    \item Possibilità di registrazione di un nuovo utente.
+%
+    \item Possibilità di effettuare l'accesso da parte di un utente già presente all'interno del sistema.
+%
+    \item Possibilità, da parte di un utente che ha già effettuato l'accesso, di uscire dall'applicazione.
+%
+\end{itemize}
+
+Nella fase iniziale dello \textit{Sprint} ci siamo concentrati sul bootstrapping del progetto, in particolare è stato inizializzato il repository e gli strumenti di supporto alla \textit{continuous integration} (Travis CI, Gradle, Trello e Google Sheets).
+
+Successivamente siamo passati ad una fase di analisi e modellazione del problema, in particolare abbiamo identificato l'architettura del sistema e definito lo schema delle \textit{basi di dati}.
+%
+Sono stati prodotti i diagrammi UML di massima del dominio applicativo (casi d'uso e diagramma delle classi).
+
+In seguito, abbiamo modellato ciascun caso d'uso di competenza dello Sprint con dei diagrammi di sequenza e l'architettura di ogni microservizio con diagrammi delle classi. Questa parte ha richiesto più tempo del previsto e ha sottratto diverso tempo alla fase successiva di implementazione di ogni servizio.
+%
+Quest'ultima fase è stata iniziata ma non terminata all'interno di questo Sprint.
+
+\subsubsection{Retrospettiva}
+
+Analizzando il processo di sviluppo adottato in questo Sprint è emerso che alcuni task sono stati sottostimati.
+%
+In particolare, abbiamo attribuito una grandezza inferiore alle fasi di modellazione e sviluppo, di conseguenza negli Sprint successivi verranno calibrati meglio i task per ogni sprint. In particolare task troppo onerosi saranno scomposti in sotto-task più piccoli da distribuire in più sprint.
+
+\subsection{Sprint 2}
+
+In questo Sprint è stata terminata l'implementazione lato \textit{server} delle funzionalità che non erano state completate nello Sprint precedente ed è stato applicato in maniera sistematica lo \textit{unit-testing} durante la fase di sviluppo.
+
+Inoltre è stata iniziata l'implementazione del client in \textit{Angular}: architettura generale, componenti principali e impostazione del \textit{template}.
+
+\subsubsection{Retrospettiva}
+
+I risultati di questo Sprint sono stati abbastanza soddisfacenti, in quanto è stato applicato il processo di TDD per tutti i test delle Web API di ogni servizio.
+
+A livello di processo di processo di sviluppo, negli Sprint successivi, saranno effettuate \textit{pull request} più frequenti al fine di risolvere un minor numero di conflitti durante la fusione delle singole \textit{pull request}.
+
+\subsection{Sprint 3}
+
+In questo Sprint sono state aggiunte le seguenti funzionalità:
+
+\begin{itemize}
+%
+    \item Aggiunta di una nuova stanza.
+%
+    \item Eliminazione di una stanza.
+%
+    \item Controllo della validità del token passato da un utente.
+%
+\end{itemize}
+
+In questo Sprint ogni membro del team ha terminato i task assegnati. È stata ultimata l'implementazione dei microservizi in merito ai casi d'uso che erano stati prefissati.
+
+\subsubsection{Retrospettiva}
+
+Gli elementi assegnati a questa settimana si sono dimostrati correttamente quantificati per questo abbiamo ritenuto che l'aggiunta di ulteriori task per i successivi Sprint non sia necessaria.
+Tutti i membri sono riusciti a completare i propri compiti nell'arco della settimana.
+
+Per lo Sprint successivo ci cercherò di portare a termine lo sviluppo di un prototipo funzionante in base ai casi d'uso implementati finora.
+
+\subsection{Sprint 4}
+
+In questo Sprint ci siamo dedicati al \textit{debug} delle funzionalità sviluppate fino a questo momento, sia lato client sia lato servizi.
+
+Abbiamo cambiato il \textit{layout} dell'applicazione web applicando un nuovo \textit{template} che consente una prototipazione più facile dell'interfaccia utente.
+
+Abbiamo introdotto la validazione delle richieste effettuate dall'utente in ogni servizio.
+
+Ė stato uno Sprint particolarmente impegnativo dal punto di vista del carico di lavoro; in particolare per la validazione dell'input delle richieste di ogni servizio. Siamo comunque riusciti a completare con successo tutti i tasks prefissati.
+È stato raggiunto l'obiettivo di realizzare un prototipo funzionante che implementasse i casi d'uso finora delineati.
+
+\subsubsection{Retrospettiva}
+
+I tasks assegnati sono stati completati anche se non è rimasto tempo per ulteriori migliorie o refactoring del codice. Nel prossimo Sprint vogliamo riservare spazio anche per aumentare il numero di test e riportare la qualità del codice ad un livello più alto.
+
+\subsection{Sprint 5}
+
+In questo Sprint sono state aggiunte le seguenti funzionalità:
+
+\begin{itemize}
+%
+    \item Ricerca di una stanza da parte di un utente.
+%
+    \item Possibilità, da parte di un utente, di unirsi ad una stanza già esistente.
+%
+\end{itemize}
+
+\`E stato aggiunto il broadcasting dell'evento di creazione di una stanza, in modo tale che ogni client possa essere informato, durante la fase di ricerca di una stanza quando una nuova stanza è stata aggiunta senza aver bisogno di effettuare una nuova ricerca.
+
+I task per questo Sprint sono stati completati con successo, a meno della ricerca delle stanze. In particolare è incompleta la parte client.
+\`E stata definita, inoltre, una specifica standard per le rotte dei servizi \textit{REST}, tramite \textit{Swagger}. Quindi nel prossimo Sprint, si dovranno adattare le rotte già implementate alla specifica delineata.
+
+\subsubsection{Retrospettiva}
+
+In questo Sprint è stato aggiornato il backlog con nuovi task in modo incrementale; l'obiettivo per lo Sprint successivo sarà quello di terminare i task prefissati al suo inizio, senza aggiungerne di nuovi nel corso dello Sprint.
+Complessivamente, lo Sprint si è concluso senza particolari problemi.
+
+\subsection{Sprint 6}
+
+In questo Sprint sono state aggiunte le seguenti funzionalità:
+
+\begin{itemize}
+%
+    \item Invio di un messaggio da parte di un utente.
+%
+    \item Ricezione di un messaggio da parte dell'utente.
+%
+    \item Possibilità da parte di utente di abbandonare una stanza.
+%
+    \item Possibilità da parte di utente di visualizzare le informazioni relative ad una stanza stanza.
+%
+\end{itemize}
+
+\`E stata ultimata la standardizzazione delle interfacce \textit{REST} di ogni servizio ed è stata completata la ricerca delle stanze da parte dell'utente.
+
+È stato uno Sprint a carattere decisamente implementativo, durante il quale sono state sviluppate diverse feature fondamentali per la web application (e.g. invio/ricezione di un messaggio, ricerca di una stanza, visualizzazione dei dettagli di una stanza, ecc.).
+I compiti assegnati sono stati interamente completati.
+
+\subsubsection{Retrospettiva}
+
+Riteniamo che il team abbia previsto un carico di lavoro adeguato alle ore a disposizione. Lo sviluppo è stato particolarmente produttivo, grazie anche al maggior tempo a disposizione per l'implementazione di nuove feature.
+Non è stato riscontrato nessun problema particoalare. La sfida dei prossimi Sprint, a livello di processo, sarà definire un piano di lavoro che porti alla terminazione dell'implementazione del sistema e alla scrittura della relazione di progetto, in tempo utile per la consegna finale.
+
+\subsection{Sprint 7}
+
+In questo Sprint sono state aggiunte le seguenti funzionalità:
+
+\begin{itemize}
+%
+    \item Possibilità da parte di un utente di rendersi invisibile agli altri utenti.
+%
+    \item Possibilità di visualizzare il profilo degli altri utenti presenti in una chat.
+%
+    \item Possibilità di visualizzare in tempo reale l'aggioranmento sullo stato di scrittura da parte di utente.
+%
+    \item Possibilità di recuperare i messaggi precedentemente scambiati all'interno di una stanza.
+%
+\end{itemize}
+
+In questo Sprint sono state sviluppate con successo tutte le funzionalità rimaste, escluse le opzionali, ottenendo così come risultato il sistema completo.
+
+\subsubsection{Retrospettiva}
+
+I tasks assegnati per questo Sprint si sono dimostrati correttamente quantificati. L'obbiettivo per lo Sprint successivo sarà quello di scrivere la relazione in maniera dettagliata, completa ed esaustiva.
+
+\subsection{Sprint 8}
+
+In questo Sprint il team si è dedicato alla stesura della Relazione di progetto.
+È stato deciso di dividere il team in gruppi di due persone, in modo tale che alla fine del lavoro ogni gruppo ha potuto revisionare la parte dell'altro.
+La relazione secondo le regole d'esame doveva essere formata da 6 capitoli; formando due gruppi, ognuno ha potuto scrivere esattamente 3 capitoli della relazione.
+
+\subsubsection{Retrospective}
+
+La divisione del lavoro è risultata corretta ai fini del completamento dello Sprint e della Relazione. Ci siamo resi conto che alcuni diagrammi UML realizzati in precedenza dovevano essere ampliati, in quanto definiti durante il primo Sprint e di conseguenza non coprivano ancora tutte le funzionalità che il sistema avrebbe implementato. 
+
+\section{Commenti finali}
+Avendo impostato il progetto seguendo la filosofia della \textit{Clean Architecture}, basata su una modellazione delle funzionalità in termini di casi d'uso (\textit{interattori}), il nostro codice risulta molto pulito, leggibile, riutilizzabile e facilmente manutenibile.
+
+L'utilizzo delle \textit{pull request} messe a disposizione da \textit{GitHub} è risultato molto efficace durante lo sviluppo, in quanto ciascun membro del team ha potuto lavorare autonomamente nel proprio repository.
+I vantaggi derivanti sono stati:
+\begin{enumerate*}[label=(\arabic*)]
+%
+    \item un minor numero di conflitti durante lo sviluppo concorrente,
+%
+    \item il testing automatico di ciascuna feature prima di essere caricata (\textit{Continuous Integration} di \textit{TravisCI}) e
+%
+    \item autonomia nello sviluppo.
+%
+\end{enumerate*}
+
+Anche l'approccio Agile è risultato molto comodo, ci ha permesso di organizzare al meglio i task da svolgere e l'obiettivo di soddisfare gli Sprint ha motivato tutto il gruppo a lavorare regolarmente e costantemente.
+\`E stato riscontrato qualche problema solo durante le prime settimane, in quanto dovevamo capire il giusto peso da attribuire ai vari task e imparare il corretto approccio a questa metodologia di sviluppo, a noi nuova.
+
+Ogni settimana, a partire dalla quarta, è stato rilasciato un prototipo di progetto che è stato arricchito di nuove funzionalità in maniera incrementale.
+%
+Durante i  primi Sprint ci siamo concentrati nella creazione della struttura base di tutti i servizi e del client. Successivamente abbiamo proceduto all'implementazione di tutti i casi d'uso seguendo una scaletta in ordine d'importanza decrescente.
+
+Al termine del progetto il team si ritiene soddisfatto del lavoro svolto; tutti i requisiti funzionali sono stati completati ed è possibile utilizzare \textit{Distributed Chat Service} in maniera distribuita con aggiornamenti in tempo reale.
+I servizi possono trovarsi su macchine differenti senza causare alcun problema all'esecuzione della chat.
+
+\section{Estensioni future}
+
+Pensando ad un prossimo sviluppo, ci piacerebbe estendere \textit{Distributed Chat Service} con le seguenti funzionalità:
+
+\begin{itemize}
+%
+    \item Trasferimeto di file multimediali nelle chat.
+%
+    \item Suoni personalizzati all'arrivo dei messaggi a seconda del mittente e della stanza.
+%
+    \item Invio di note vocali.
+%
+    \item Integrazione di emoji.
+%
+    \item \textit{Chatbot} helper e di compagnia.
+\end{itemize}

@@ -27,7 +27,7 @@ class GetMessagesUseCaseSpec extends JUnitSpec with MockFactory with OneInstance
 
   val request = GetMessagesRequest(roomName)
 
-  val subscriber = stub[Subscriber[List[Message]]]
+  val subscriber: Subscriber[List[Message]] = stub[Subscriber[List[Message]]]
 
   it should "Get all the messages for a given room" in {
     //Given

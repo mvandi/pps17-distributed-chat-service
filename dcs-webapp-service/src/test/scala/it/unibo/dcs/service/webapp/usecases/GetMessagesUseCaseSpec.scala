@@ -6,6 +6,8 @@ import it.unibo.dcs.service.webapp.usecases.commons.Mocks.{authRepository, postE
 import it.unibo.dcs.service.webapp.usecases.commons.UseCaseSpec
 import rx.lang.scala.{Observable, Subscriber}
 
+import scala.language.postfixOps
+
 class GetMessagesUseCaseSpec extends UseCaseSpec {
 
   private val getMessagesRequest = GetMessagesRequest(user.username, roomName, token)

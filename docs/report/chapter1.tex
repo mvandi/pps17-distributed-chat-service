@@ -1,0 +1,58 @@
+\chapter{Processo di Sviluppo}
+\section{Metodologia di sviluppo}
+Relativamente al processo di sviluppo è stato deciso di adottare e testare una
+metodologia \textbf{Agile Scrum-like}. \newline
+Nella versione da noi utilizzata
+i membri del team sono allo stesso livello, non esiste infatti
+uno \textit{Scrum Leader}, ne uno \textit{Scrum Manager}. Il ruolo del \textit{Product Manager} è
+stato ricoperto da \textit{Nicola Piscaglia}. 
+Come alternativa ad una vera e propria \textit{Kanban} abbiamo
+deciso di usare \textbf{Trello}: qui, come fasi dello sprint abbiamo usato \textit{"Backlog"}, \textit{"ToDo"}, \textit{"Design"}, 
+\textit{"Develop"}, \textit{"Review"} e \textit{"Done"}. Abbiamo reputato corretto fare
+sprints con cadenza settimanale, poichè così è possibile ottenere una buona quantità di feedback
+dall'utente e numerose opportunità per imparare e migliorare. \newline
+All'inizio del processo di sviluppo abbiamo delineato il \textit{Product Backlog}, contenente gli items, 
+con relativa priorità e dimensione stimata; inoltre, è stato fatto un primo sforzo per la modellazione del sistema
+in termini di servizi e patterns architetturali, producendo: un diagramma relativo alla gerarchia dei servizi,
+uno schema relazionale ed uno logico dei databases.
+\newline
+All' inizio di ogni settimana abbiamo fatto un meeting, tutti assieme,
+per decidere quali elementi del \textit{Product Backlog} assegnare al
+prossimo sprint, strutturando lo
+\textit{Sprint Backlog}, delineando con più precisione la dimensione degli items. 
+\\A seguito di ciò,
+i membri del team hanno scelto gli items seguendo le priorità già delineate 
+ed hanno iniziato a fare il design ed implementarne le features descritte tramite \textit{TDD}, senza più cambiare le decisioni
+ relative agli items prese all'inizio dello sprint. 
+ \\\textit{Il Test Driven Development} è un modello di sviluppo che prevede che la stesura dei tests sia fatta prima dell'implementazione e che lo sviluppo sia orientato esclusivamente all'obiettivo di passare i tests precedentemente predisposti. Più in dettaglio, \textit{TDD} prevede un breve ciclo di sviluppo in tre fasi: nella prima si scrive un test per la nuova funzione da sviluppare, nella seconda si sviluppa il codice necessario per passare il test; infine, nella terza si esegue il refactoring del codice per adeguarlo ad determinati standards di qualità.
+\newline
+Durante lo sviluppo, ogni singolo elemento del team ha la possibilità di fare \textit{Pull Requests} al 
+\textit{Repo verità} (non si può fare push): a quel punto,
+un altra persona del team controllerà la qualità del codice della singola \textit{PR} e, 
+se tutto risulta a norma, farà merge nel branch dello sprint corrente.
+Lo strumento di \textit{continuous integration} è stato configurato per permettere il merge di una pull request solo in caso di procedura di build andata a buon fine e solo se tutti i tests terminano con successo; Infine, è stato impostato lo stesso strumento in modo da
+generare in automatico l'eseguibile del progetto.
+\newline
+Al termine di ogni \textit{Sprint} i componenti del team hanno preso parte ad un meeting, in cui sono state
+poste in atto le fasi di \textit{Sprint Review} (per valutare il risultato dello Sprint e stabilire le priorit`a delle
+prossime feature da portare a termine) e di \textit{Retrospective} (per analizzare il processo di sviluppo
+allo scopo di migliorare la produttività del team).
+\\
+Si è reso necessario, a volte, contattare elementi del team tramite Skype o strumenti simili, 
+senza riunire però tutti gli elementi, per risolvere problemi o per procedere con lo sviluppo.
+Infine, gli items non completati entro la fine dello sprint sono stati semplicemente riportati
+nello sprint successivo.
+
+\section{Strumenti adottati}
+I principali strumenti utilizzati durante l'intero processo di sviluppo sono i seguenti:
+\begin{itemize}
+\item \textbf{Git}: come sistema di versioning abbiamo optato per Git per la sua diffusione, velocità e semplicità di utilizzo;
+\item \textbf{GitHub}: è stato scelto GitHub come servizio di hosting;
+per il version control e per il repository, poichè permette ampia possibilità di integrazione con altri strumenti di sviluppo. Il repository è disponibile al seguente \href{https://github.com/GMPVTeam/pps17-distributed-chat-service}{link};
+\item \textbf{GitFlow}: come metodologia di \textit{branching} all’interno del repository abbiamo adottato
+GitFlow, poichè rende lo sviluppo parallelo molto semplice;
+\item \textbf{Google Sheets}: la creazione e gestione del \textit{Product Backlog}, \textit{Sprint Backlog}, \textit{Sprint Review} e \textit{Sprint Retrospective} sono state fatte tramite Google Sheets, vista la sua semplicità di utilizzo. È possibile visualizzare i documenti predetti al seguente \href{https://docs.google.com/spreadsheets/d/13H6Xl3ZzywzSpik3gxQbl6CnDtzObbCIdqROZq82Zk4/edit?usp=sharing}{link};
+\item \textbf{Gradle}: per la gestione della build di progetto è stato scelto Gradle, per la sua alta velocità;
+\item \textbf{Travis CI}: è stato inoltre utilizzato Travis CI come strumento di \textit{continuos integration}: esso permette di verificare, ad ogni nuova modifica del repository, che il progetto continui a compilare con successo e a controllare che i tests passino, in un ambiente unico;
+\item \textbf{Trello}: come strumento di tracciamento delle fasi del ciclo di sviluppo. È possibile visionare la \textit{Kanban} al seguente \href{https://trello.com/b/iTJXBZUX}{link}.
+\end{itemize}

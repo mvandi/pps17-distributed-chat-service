@@ -8,7 +8,7 @@ import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
 import it.unibo.dcs.service.webapp.interaction.Labels.JsonLabels._
 import it.unibo.dcs.service.webapp.model.{Participation, Room, User}
 
-import scala.language.implicitConversions
+import scala.language.{implicitConversions, postfixOps}
 
 /** It wraps all requests used by request handler, use cases, it.unibo.dcs.service.webapp.repositories,
   * datastores and APIs */

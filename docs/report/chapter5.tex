@@ -1,0 +1,290 @@
+\chapter{Implementazione}
+
+In questo capitolo sono analizzati nel dettaglio i contributi apportati da ciascun componente del gruppo.
+
+Avendo impostato il sistema basandoci sulla \textit{Clean Architecture}, in cui la modellazione delle funzionalità del sistema viene trattata in termini di casi d'uso (\textit{interattori}), gran parte del carico di lavoro è stato suddiviso tra i membri del team attraverso la  \textbf{spartizione dei casi d'uso} da implementare.
+Per la creazione dei micro-servizi sono state utilizzate le librerie messe a disposizione da Vert.x. Per la realizzazione dei test sono state usate le librerie \texttt{ScalaTest} e \texttt{ScalaMock}.
+
+\section{Componenti creati in cooperazione}
+
+Bootstrapping dell'Architettura:
+
+\begin{itemize}
+    \item Identificazione e design dei servizi richiesti
+    \item Identificazione delle sorgenti necessari per ogni servizio e design dei \textit{DB}
+    \item Identificazione e preparazione della piattaforma \textit{DBaaS} 
+    \item Creazione degli \textit{Use Case Diagram} in \textit{UML}
+    \item Creazione dei \textit{Class Diagram} in \textit{UML}
+    \item Creazione dei \textit{Sequence Diagram} in \textit{UML}
+\end{itemize}
+
+\section{Alessandro}
+Lo studente \textit{Alessandro Gnucci} si è occupato dello sviluppo dei seguenti items, definiti nel \textit{Product Backlog}:
+\begin{itemize}
+    \item \textbf{Architecture bootstrapping} (con il resto del team). Questa parte si articola in:
+    \begin{itemize}
+        \item Identificazione dei servizi richiesti;
+        \item Identificazione delle sorgenti dati per i servizi e design dei \textit{DB};
+        \item Identificazione e preparazione della piattaforma \textit{DBaaS}, inoltre design dell'\textit{UML Use Case Diagram}.
+        \item  Design dell'\textit{UML Class Diagram}.
+    \end{itemize}
+    
+    \item \textbf{Registrazione di un utente}
+        \begin{itemize}
+            \item Design del diagramma \textit{UML} di sequenza (con il resto del team).
+            \item Implementazione \textit{TDD} del \textit{Authentication Service}.
+        \end{itemize}
+    
+    \item \textbf{Login di un utente}
+        \begin{itemize}
+            \item Design del diagramma \textit{UML} di sequenza (con il resto del team).
+            \item Implementazione \textit{TDD} dell'\textit{Authentication Service}.
+        \end{itemize}
+        
+    \item \textbf{Logout}
+    \begin{itemize}
+        \item Design del diagramma \textit{UML} di sequenza (con il resto del team).
+        \item Implementazione \textit{TDD} dell'\textit{Authentication Service}.
+    \end{itemize}
+    
+    \item \textbf{Controllo di validità dei tokens Jwt}: 
+    implementazione \textit{TDD} dell'\textit{Authentication Service}.
+        
+     \item \textbf{Rimozione di una stanza}: 
+    \begin{itemize}
+        \item implementazione \textit{TDD} del \textit{WebApp Service}.
+        \item implementazione \textit{TDD} del \textit{Room Service}.
+        \item Implementazione \textit{TDD} del \textit{Web Client}.
+    \end{itemize}   
+        
+    \item \textbf{Ricerca di una stanza}: implementazione \textit{TDD} del \textit{Room Service}.
+
+    \item \textbf{Cancellazione di un account}: implementazione \textit{TDD} 
+    dell'\textit{Authentication Service}.
+        
+    \item \textbf{Refactoring del codice dei servizi}: refactoring del codice 
+    dell'\textit{Authentication Service}.
+    
+    \item \textbf{Abbandono da parte di un utente di una stanza}: 
+    \begin{itemize}
+        \item implementazione \textit{TDD} del \textit{WebApp Service}.
+        \item implementazione \textit{TDD} del \textit{Room Service}.
+        \item Implementazione \textit{TDD} del \textit{Web Client}.
+    \end{itemize}  
+    
+    \item \textbf{Modifica del profilo utente}: 
+    \begin{itemize}
+        \item implementazione \textit{TDD} del \textit{WebApp Service}.
+        \item implementazione \textit{TDD} del \textit{User Service}.
+        \item Implementazione \textit{TDD} del \textit{Web Client}.
+    \end{itemize}  
+    
+    \item \textbf{Aggiornamento in real-time sullo stato di scrittura degli utenti nelle stanze}: 
+    \begin{itemize}
+        \item implementazione \textit{TDD} del \textit{WebApp Service}.
+        \item Implementazione \textit{TDD} del \textit{Web Client}.
+    \end{itemize}  
+    
+\end{itemize}
+
+\section{Nicola}
+All'interno del progetto \textit{Distributed Chat Service}, lo studente \textit{Nicola Piscaglia} si è occupato dello sviluppo dei seguenti item definiti nel \textit{Product Backlog}:
+\begin{itemize}
+    \item \textbf{Project bootstrapping}: in particolare dell'inizializzazione e configurazione di \textit{Travis CI}.
+    
+    \item \textbf{Architecture bootstrapping} (in cooperazione con gli altri membri del team). In particolare questa fase si è articolata in:
+    \begin{itemize}
+        \item Identificazione dei servizi richiesti (si è scelto di utilizzare l'architettura a microservizi).
+        \item Identificazione delle sorgenti dati necessarie per ogni servizio e design del \textit{DB}.
+        \item Identificazione/creazione della piattaforma \textit{DBaaS} e design dell'\textit{UML Use Case Diagram}.
+        \item \textit{UML Class Diagram} Design.
+    \end{itemize}
+    
+    \item \textbf{Registrazione di un utente}
+        \begin{itemize}
+            \item Design del diagramma \textit{UML} di sequenza (in cooperazione con gli altri membri del team).
+            \item Implementazione \textit{TDD} del \textit{WebApp Service}.
+        \end{itemize}
+    
+    \item \textbf{Login}
+        \begin{itemize}
+            \item design del diagramma \textit{UML} di sequenza (in cooperazione con gli altri membri del team).
+            \item Implementazione \textit{TDD} del \textit{WebApp Service}.
+        \end{itemize}
+    
+    \item \textbf{Logout}
+        \begin{itemize}
+            \item Design del diagramma \textit{UML} di sequenza (in cooperazione con gli altri membri del team).
+            \item Implementazione \textit{TDD} del \textit{WebApp Service}.
+        \end{itemize}
+        
+     \item \textbf{Creazione di una stanza}: implementazione \textit{TDD} del \textit{WebApp Service}.
+     
+     \item \textbf{Rimozione di una stanza}: implementazione del \textit{Web Client}.
+    
+    \item \textbf{Validazione dell'input}: implementazione della validazione delle richieste di ogni servizio.
+    
+    \item \textbf{Partecipazione ad una stanza}:
+        \begin{itemize}
+            \item implementazione del \textit{Web Client}.
+            \item implementazione \textit{TDD} del \textit{WebApp Service}.
+        \end{itemize}
+        
+    \item \textbf{Refactoring del codice dei servizi}: refactoring del codice del \textit{WebApp Service}.
+    
+    \item \textbf{Standardizzazione delle Rest API}: in particolare sono state uniformate le chiamate REST e le rotte in base al design formalizzato tramite specifica \textit{Swagger}. Tali cambiamenti hanno impattato i seguenti componenti:
+        \begin{itemize}
+            \item \textit{WebApp Service}
+            \item \textit{Room Service}
+            \item \textit{User Service}
+            \item \textit{Authentication Service}
+            \item \textit{Web Client}
+        \end{itemize}
+    
+    \item \textbf{Visualizzazione delle informazioni di una stanza}
+    \begin{itemize}
+        \item Implementazione \textit{TDD} del \textit{WebApp Service}.
+        \item Implementazione \textit{TDD} del \textit{Room Service}.
+        \item Implementazione del \textit{Web Client}.
+    \end{itemize}
+    
+    \item \textbf{Visualizzazione del profilo di altri utenti}
+    \begin{itemize}
+        \item Implementazione \textit{TDD} del \textit{WebApp Service}.
+        \item Implementazione \textit{TDD} dello \textit{User Service}.
+        \item Implementazione del \textit{Web Client}.
+    \end{itemize}
+    
+\end{itemize}
+
+
+\section{Martina}
+
+All'interno del progetto \textit{Distributed Chat Service} la studentessa \textit{Magnani Martina} si è occupata dello sviluppo delle seguenti parti:
+
+\begin{itemize}
+    \item Registrazione di un utente:
+    \begin{itemize}
+        \item Implementazione TDD del micro-servizio \textit{User Service}.
+    \end{itemize}
+    \item Login di un utente:
+    \begin{itemize}
+        \item Implementazione TDD del micro-servizio \textit{User Service}.
+    \end{itemize}
+    \item Creazione di una stanza:
+    \begin{itemize}
+        \item Implementazione TDD del micro-servizio \textit{Room Service}.
+        \item Implementazione del \textit{Web Client} in cooperazione con \textit{Vandi Mattia}.
+        \item Debug e testing (Service \& Web Client) della funzionalità ai fini della \textit{release}.
+    \end{itemize}
+    \item Refactoring del codice dei servizi:
+    \begin{itemize}
+        \item Refactoring del codice del micro-servizio \textit{User Service}.
+    \end{itemize}
+    \item Ricerca di una stanza:
+    \begin{itemize}
+        \item Implementazione TDD del micro-servizio \textit{WebApp Service}.
+    \end{itemize}
+    \item Partecipazione ad una stanza:
+    \begin{itemize}
+        \item Implementazione TDD del micro-servizio \textit{Room Service}.
+    \end{itemize}
+    \item Invio di un messaggio:
+    \begin{itemize}
+        \item Implementazione TDD del micro-servizio \textit{Room Service}.
+        \item Implementazione TDD del micro-servizio \textit{WebApp Service}.
+        \item Implementazione del \textit{Web Client}.
+    \end{itemize}
+    \item Ricezione di un messaggio:
+    \begin{itemize}
+        \item Implementazione TDD del micro-servizio \textit{Room Service}.
+        \item Implementazione TDD del micro-servizio \textit{WebApp Service}.
+        \item Implementazione del \textit{Web Client}.
+    \end{itemize}
+    \item Ricezione dei messaggi passati per le stanze in cui l'utente partecipa:
+    \begin{itemize}
+        \item Implementazione TDD del micro-servizio \textit{Room Service}.
+        \item Implementazione TDD del micro-servizio \textit{WebApp Service}.
+        \item Implementazione del \textit{Web Client}.
+    \end{itemize}
+\end{itemize}
+
+\section{Mattia}
+
+All'interno del progetto \textit{Distributed Chat Service} lo studente \textit{Vandi Mattia} si è occupato dello sviluppo delle seguenti parti:
+
+\begin{itemize}
+%
+    \item Bootstrapping del progetto:
+%
+    \begin{itemize}
+%
+        \item Inizializzazione del repository.
+%
+        \item Inizializzazione della configurazione multi-progetto Gradle.
+%
+        \item Inizializzazione di Trello.
+%
+    \end{itemize}
+%
+    \item Registrazione di un utente:
+%
+    \begin{itemize}
+%
+        \item Implementazione TDD nel micro-servizio \textit{User Service}.
+%
+        \item Implementazione del \textit{Web Client}.
+%
+    \end{itemize}
+%
+    \item Creazione di una stanza:
+%
+    \begin{itemize}
+%
+        \item Implementazione del \textit{Web Client}.
+%
+    \end{itemize}
+%
+    \item Eliminazione di una stanza:
+%
+    \begin{itemize}
+%
+        \item Implementazione TDD nel micro-servizio \textit{Room Service}.
+%
+    \end{itemize}
+%
+    \item Ricerca di una stanza:
+%
+    \begin{itemize}
+%
+        \item Implementazione del \textit{Web Client}.
+%
+    \end{itemize}
+%
+    \item Refactoring del micro-servizio \textit{Room Service}.
+%
+    \item Broadcasting degli eventi di creazione e eliminazione di una stanza.
+%
+    \begin{itemize}
+%
+        \item Implementazione TDD nel micro-servizio \textit{Web App Service}.
+%
+        \item Implementazione del \textit{Web Client}.
+%
+    \end{itemize}
+%
+    \item Definizione di una descrizione formale dei micro-servizi utilizzando il tool \textit{Swagger}.
+%
+    \item Invisibilità dell'utente:
+%
+    \begin{itemize}
+%
+        \item Implementazione TDD nel micro-servizio \textit{Room Service}.
+%
+        \item Implementazione TDD nel micro-servizio \textit{Web App Service}.
+%
+        \item Implementazione del \textit{Web Client}.
+%
+    \end{itemize}
+%
+\end{itemize}

@@ -1,9 +1,9 @@
 package it.unibo.dcs.commons.dataaccess
 
 import io.vertx.lang.scala.json.JsonObject
-import org.scalatest.FlatSpec
+import it.unibo.dcs.commons.test.JUnitSpec
 
-final class InsertParamsSpec extends FlatSpec {
+final class InsertParamsSpec extends JUnitSpec {
 
   val paramNumber = 5
 

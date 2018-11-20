@@ -2,8 +2,8 @@ package it.unibo.dcs.service.webapp.usecases
 
 import io.vertx.scala.core.Context
 import it.unibo.dcs.commons.RxHelper
-import it.unibo.dcs.commons.interactor.{ThreadExecutorExecutionContext, UseCase}
 import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExecutor}
+import it.unibo.dcs.commons.interactor.{ThreadExecutorExecutionContext, UseCase}
 import it.unibo.dcs.service.webapp.interaction.Requests.{CheckTokenRequest, GetMessagesRequest}
 import it.unibo.dcs.service.webapp.interaction.Results.GetMessagesResult
 import it.unibo.dcs.service.webapp.repositories.{AuthenticationRepository, RoomRepository}
@@ -16,9 +16,11 @@ class GetMessagesUseCase (private[this] val threadExecutor: ThreadExecutor,
   extends UseCase[GetMessagesResult, GetMessagesRequest](threadExecutor, postExecutionThread) {
 
   override protected[this] def createObservable(request: GetMessagesRequest): Observable[GetMessagesResult] =
-    authRepository.checkToken(CheckTokenRequest(request.token, request.username))
-      .flatMap(_ => roomRepository.getMessages(request))
-      .map(messages => GetMessagesResult(messages))
+    for {
+      _ <- authRepository.checkToken(CheckTokenRequest(request.token, request.username))
+      messages <- roomRepository.getMessages(request)
+    } yield GetMessagesResult(messages)
+
 }
 
 object GetMessagesUseCase {

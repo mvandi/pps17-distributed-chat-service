@@ -1,5 +1,5 @@
 {
-    "url": "jdbc:mysql://mysql1.gear.host/userservice?autoReconnect=true",
+    "url": "jdbc:mysql://mysql1.gear.host/userservice?autoReconnect=true&interactiveClient=true",
     "driver_class": "com.mysql.cj.jdbc.Driver",
     "user": "userservice",
     "password": "teddy_95"

@@ -16,3 +16,20 @@ final class GetUserUseCase(private[this] val threadExecutor: ThreadExecutor,
     userRepository.getUserByUsername(request)
 
 }
+
+/** Companion object */
+object GetUserUseCase {
+
+  /** Factory method to create the use case
+    *
+    * @param threadExecutor      thread executor that will perform the subscription
+    * @param postExecutionThread thread that will be notified of the subscription result
+    * @param userRepository user repository reference
+    * @return
+    */
+  def apply(threadExecutor: ThreadExecutor, postExecutionThread: PostExecutionThread,
+            userRepository: UserRepository): GetUserUseCase = {
+    new GetUserUseCase(threadExecutor, postExecutionThread, userRepository)
+  }
+
+}

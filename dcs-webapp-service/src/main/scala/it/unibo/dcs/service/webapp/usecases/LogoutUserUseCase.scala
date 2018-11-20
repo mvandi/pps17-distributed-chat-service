@@ -6,7 +6,6 @@ import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExec
 import it.unibo.dcs.commons.interactor.{ThreadExecutorExecutionContext, UseCase}
 import it.unibo.dcs.service.webapp.interaction.Requests.LogoutUserRequest
 import it.unibo.dcs.service.webapp.interaction.Results.LogoutResult
-import it.unibo.dcs.service.webapp.model.User
 import it.unibo.dcs.service.webapp.repositories.{AuthenticationRepository, UserRepository}
 import rx.lang.scala.Observable
 

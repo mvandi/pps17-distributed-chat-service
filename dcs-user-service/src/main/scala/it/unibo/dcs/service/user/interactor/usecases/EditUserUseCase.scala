@@ -18,3 +18,22 @@ final class EditUserUseCase(private[this] val threadExecutor: ThreadExecutor,
     validation(request).flatMap(_ => userRepository.editUser(request))
 
 }
+
+
+/** Companion object */
+object EditUserUseCase {
+
+  /** Factory method to create the use case
+    *
+    * @param threadExecutor      thread executor that will perform the subscription
+    * @param postExecutionThread thread that will be notified of the subscription result
+    * @param userRepository user repository reference
+    * @param validation create user validation reference
+    * @return
+    */
+  def apply(threadExecutor: ThreadExecutor, postExecutionThread: PostExecutionThread,
+            userRepository: UserRepository, validation: ValidateUserEditing): EditUserUseCase = {
+    new EditUserUseCase(threadExecutor, postExecutionThread, userRepository, validation)
+  }
+
+}

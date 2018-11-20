@@ -1,7 +1,5 @@
 package it.unibo.dcs.service.webapp.repositories
 
-import java.util.Date
-
 import it.unibo.dcs.service.webapp.interaction.Requests._
 import it.unibo.dcs.service.webapp.model.{Message, Participation, Room}
 import it.unibo.dcs.service.webapp.repositories.commons.RepositorySpec

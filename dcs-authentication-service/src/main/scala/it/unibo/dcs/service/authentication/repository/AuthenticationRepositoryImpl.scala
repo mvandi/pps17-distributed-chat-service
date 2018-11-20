@@ -13,10 +13,6 @@ class AuthenticationRepositoryImpl(private[this] val authDataStore: Authenticati
     authDataStore.createUser(username, password)
       .onErrorResumeNext(_ => Observable.error(UserAlreadyExistsException(username)))
 
-  override def checkUserExistence(username: String): Observable[Unit] =
-    authDataStore.checkUserExistence(username)
-      .onErrorResumeNext(_ => Observable.error(UserNotFoundException(username)))
-
   override def checkUserCredentials(username: String, password: String): Observable[Unit] =
     authDataStore.checkUserCredentials(username, password)
       .onErrorResumeNext(_ => Observable.error(WrongUsernameOrPasswordException))

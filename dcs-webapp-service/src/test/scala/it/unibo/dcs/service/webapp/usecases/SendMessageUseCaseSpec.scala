@@ -1,17 +1,12 @@
 package it.unibo.dcs.service.webapp.usecases
 
-import java.util.Date
-
-import it.unibo.dcs.service.webapp.interaction.Requests.{CheckTokenRequest, SendMessageRequest}
+import it.unibo.dcs.service.webapp.interaction.Requests.SendMessageRequest
 import it.unibo.dcs.service.webapp.interaction.Results.SendMessageResult
-import it.unibo.dcs.service.webapp.model.{Message, Room}
-import it.unibo.dcs.service.webapp.repositories.RoomRepository
+import it.unibo.dcs.service.webapp.usecases.commons.Mocks._
 import it.unibo.dcs.service.webapp.usecases.commons.UseCaseSpec
 import rx.lang.scala.{Observable, Subscriber}
 
 import scala.language.postfixOps
-
-import it.unibo.dcs.service.webapp.usecases.commons.Mocks._
 
 class SendMessageUseCaseSpec extends UseCaseSpec {
   private val sendMessageRequest = SendMessageRequest(room.name, user.username, content, timestamp, token)

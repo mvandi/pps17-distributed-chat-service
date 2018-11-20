@@ -1,0 +1,602 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: WebApp Service API
+  description: A description of the WebApp Service API using OpenAPI Specification.
+
+schemes:
+- http
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+#host: www.example.com
+basePath: /api
+
+paths:
+  /register:
+    post:
+      summary: Register a new User.
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: user
+        in: body
+        description: The user to create.
+        schema:
+          required:
+          - username
+          - firstName
+          - lastName
+          - password
+          properties:
+            username:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+            password:
+              type: string
+        required: true
+      responses:
+        201:
+          description: The user was successfully registered.
+          schema:
+            required:
+            - username
+            - firstName
+            - lastName
+            - bio
+            - visible
+            - lastSeen
+            - token
+            properties:
+              username:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              bio:
+                type: string
+              visible:
+                type: boolean
+              lastSeen:
+                type: string
+                format: date-time
+              token:
+                type: string
+
+  /login:
+    post:
+      summary: Login a User.
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: user
+        in: body
+        description: The user to create.
+        schema:
+          required:
+          - username
+          - password
+          properties:
+            username:
+              type: string
+            password:
+              type: string
+        required: true
+      responses:
+        200:
+          description: The user was successfully logged in.
+          schema:
+            required:
+            - username
+            - firstName
+            - lastName
+            - bio
+            - visible
+            - lastSeen
+            - token
+            properties:
+              username:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              bio:
+                type: string
+              visible:
+                type: boolean
+              lastSeen:
+                type: string
+                format: date-time
+              token:
+                type: string
+
+  /logout:
+    delete:
+      summary: Logs out a User.
+      security:
+      - Bearer: []
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: user
+        in: body
+        description: The user to log out.
+        schema:
+          required:
+          - username
+          properties:
+            username:
+              type: string
+        required: true
+      responses:
+        200:
+          description: The user was successfully logged out.
+
+  /rooms:
+    get:
+      summary: Retrieves a list of rooms.
+      security:
+      - Bearer: []
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user"
+        in: query
+        description: The username of the user which made the request.
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: A list of Room
+          schema:
+            type: array
+            items:
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+    post:
+      summary: Creates a new room.
+      security:
+      - Bearer: []
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: room
+        in: body
+        description: The room to create.
+        schema:
+          required:
+          - name
+          - username
+          properties:
+            name:
+              type: string
+            username:
+              type: string
+        required: true
+      responses:
+        201:
+          description: The room was successfully created.
+          schema:
+            required:
+            - name
+            properties:
+              name:
+                type: string
+
+  /rooms/{name}:
+    delete:
+      summary: Deletes a room.
+      security:
+      - Bearer: []
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: path
+        description: The name of the room to delete.
+        required: true
+        type: "string"
+      - name: room
+        in: body
+        description: The room to delete.
+        schema:
+          required:
+          - username
+          properties:
+            username:
+              type: string
+        required: true
+      responses:
+        204:
+          description: The room was successfully deleted.
+  /rooms/{name}/messages:
+    get:
+      security:
+      - Bearer: []
+      summary: Retrieves a list of all the messages in a room.
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: path
+        description: The name of the room in which retrieve the messages.
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: A list of Message
+          schema:
+            type: array
+            items:
+              required:
+              - content
+              - timestamp
+              - participation
+              properties:
+                content:
+                  type: string
+                participation:
+                  required:
+                  - room
+                  - username
+                  properties:
+                    room:
+                      required:
+                      - name
+                      properties:
+                        name:
+                          type: string
+                    username:
+                      type: string
+                timestamp:
+                  type: string
+                  format: date-time
+    post:
+      summary: Creates a new message in a room.
+      security:
+      - Bearer: []
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: path
+        description: The name of the room in which retrieve the messages.
+        required: true
+        type: "string"
+      - name: message
+        in: body
+        description: The Message to create.
+        schema:
+          required:
+          - content
+          - username
+          properties:
+            content:
+              type: string
+            username:
+              type: string
+        required: true
+      responses:
+        201:
+          description: The message was successfully created.
+          schema:
+            required:
+            - content
+            - timestamp
+            - participation
+            properties:
+              content:
+                type: string
+              participation:
+                required:
+                - room
+                - username
+                properties:
+                  room:
+                    required:
+                    - name
+                    properties:
+                      name:
+                        type: string
+                  username:
+                    type: string
+              timestamp:
+                type: string
+                format: date-time
+
+  /rooms/{name}/participations:
+    get:
+      summary: Retrieves all the participations for a given room.
+      security:
+      - Bearer: []
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: path
+        description: The name of the room.
+        required: true
+        type: "string"
+      - name: message
+        in: body
+        description: The Message to create.
+        schema:
+          required:
+          - username
+          properties:
+            username:
+              type: string
+        required: true
+      responses:
+        200:
+          description: A list of all the participations for the given room.
+          schema:
+            type: array
+            items:
+              required:
+              - user
+              properties:
+                user:
+                  required:
+                  - username
+                  properties:
+                    username:
+                      type: string
+    post:
+      summary: Creates a new participation.
+      security:
+      - Bearer: []
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: path
+        description: The name of the room to in which create the participation.
+        required: true
+        type: "string"
+      - name: participation
+        in: body
+        description: The user which joins the room.
+        schema:
+          required:
+          - username
+          properties:
+            username:
+              type: string
+        required: true
+      responses:
+        201:
+          description: The participation was successfully created.
+          schema:
+            required:
+            - room
+            - user
+            - joinDate
+            properties:
+              room:
+                required:
+                - name
+                properties:
+                  name:
+                    type: string
+              user:
+                required:
+                - username
+                - firstName
+                - lastName
+                - bio
+                - visible
+                - lastSeen
+                properties:
+                  username:
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  bio:
+                    type: string
+                  visible:
+                    type: boolean
+                  lastSeen:
+                    type: string
+                    format: date-time
+              joinDate:
+                type: string
+                format: date-time
+  /rooms/{name}/participations/{username}:
+    delete:
+      summary: Deletes a participation.
+      security:
+      - Bearer: []
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: path
+        description: The name of the room in which to delete the participation.
+        required: true
+        type: "string"
+      - name: "username"
+        in: path
+        description: The username of the user for which to delete the participation.
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: The participation was successfully deleted.
+
+  /users/{username}:
+    get:
+      summary: Retrieves a user given its username.
+      security:
+      - Bearer: []
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: path
+        description: The username of the user to delete.
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: The user retrieved.
+          schema:
+            required:
+            - username
+            - firstName
+            - lastName
+            - bio
+            - visible
+            - lastSeen
+            properties:
+              username:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              bio:
+                type: string
+              visible:
+                type: boolean
+              lastSeen:
+                type: string
+                format: date-time
+
+    put:
+      summary: Updates a user.
+      security:
+      - Bearer: []
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: path
+        description: The username of the user to update.
+        required: true
+        type: "string"
+      - name: user
+        in: body
+        description: The user fields to update.
+        schema:
+          properties:
+            firstName:
+              type: string
+            lastName:
+              type: string
+            bio:
+              type: string
+            visible:
+              type: boolean
+        required: true
+      responses:
+        200:
+          description: The user was successfully updated.
+          schema:
+            required:
+            - username
+            - firstName
+            - lastName
+            - bio
+            - visible
+            - lastSeen
+            properties:
+              username:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              bio:
+                type: string
+              visible:
+                type: boolean
+              lastSeen:
+                type: string
+                format: date-time
+    delete:
+      summary: Deletes a User.
+      security:
+      - Bearer: []
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: path
+        description: The username of the user to delete.
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: The user was successfully deleted.
+          schema:
+            required:
+            - username
+            properties:
+              username:
+                type: string
+
+  /users/{username}/participations:
+    get:
+      summary: Retrieves all the participations for a given user.
+      security:
+      - Bearer: []
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: path
+        description: The name of the room in which to delete the participation.
+        required: true
+        type: "string"
+      - name: "username"
+        in: path
+        description: The username of the user for which to delete the participation.
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: A list of participations.
+          schema:
+            type: array
+            items:
+              required:
+              - room
+              properties:
+                room:
+                  required:
+                  - name
+                  properties:
+                    name:
+                      type: string

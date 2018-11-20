@@ -2,8 +2,9 @@ package it.unibo.dcs.service.webapp.model
 
 import java.util.Date
 
-import com.google.gson.Gson
-import io.vertx.lang.scala.json.{Json, JsonObject}
+import io.vertx.lang.scala.json.JsonObject
+import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
+import it.unibo.dcs.service.webapp.gson
 
 import scala.language.implicitConversions
 
@@ -13,16 +14,14 @@ import scala.language.implicitConversions
   * @param room     the room joined by the user
   * @param username the user who joined the room
   */
-case class Participation(joinDate: Date, room: Room, username: String)
+case class Participation(room: Room, username: String, joinDate: Date)
 
 object Participation {
 
   object Implicits {
 
-    private val gson = new Gson()
-
     implicit def participationToJsonObject(participation: Participation): JsonObject =
-      Json.fromObjectString(gson.toJson(participation))
+      gson toJsonObject participation
   }
 
 }

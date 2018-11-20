@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BlankComponent } from './blank.component';
+import {BlankComponent} from './blank.component';
 
 describe('BlankComponent', () => {
   let component: BlankComponent;

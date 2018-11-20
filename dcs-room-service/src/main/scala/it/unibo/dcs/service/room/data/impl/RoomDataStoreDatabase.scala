@@ -3,9 +3,10 @@ package it.unibo.dcs.service.room.data.impl
 import io.vertx.lang.scala.json.{Json, JsonArray, JsonObject}
 import io.vertx.scala.ext.sql.SQLConnection
 import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
+import it.unibo.dcs.commons.dataaccess.DataStoreDatabase
 import it.unibo.dcs.commons.dataaccess.Implicits.dateToString
-import it.unibo.dcs.commons.dataaccess.{DataStoreDatabase, ResultSetHelper}
 import it.unibo.dcs.commons.dataaccess.ResultSetHelper.Implicits.RichResultSet
+import it.unibo.dcs.commons.dataaccess.ResultSetHelper.foldResult
 import it.unibo.dcs.exceptions.{ParticipationNotFoundException, ParticipationsNotFoundException, RoomNotFoundException}
 import it.unibo.dcs.service.room.data.RoomDataStore
 import it.unibo.dcs.service.room.data.impl.Implicits.participationDtoToParticipation
@@ -30,13 +31,7 @@ final class RoomDataStoreDatabase(connection: SQLConnection) extends DataStoreDa
 
   override def getRoomByName(request: GetRoomRequest): Observable[Room] =
     query(selectRoomByName, request)
-      .map { resultSet =>
-        if (resultSet.getResults.isEmpty) {
-          throw RoomNotFoundException(request.name)
-        } else {
-          resultSet.getRows.head
-        }
-      }
+      .map(foldResult(throw RoomNotFoundException(request.name))(_.getRows.head))
 
   override def getRooms(request: GetRoomsRequest): Observable[List[Room]] =
     query(selectAllRooms, request)
@@ -57,50 +52,27 @@ final class RoomDataStoreDatabase(connection: SQLConnection) extends DataStoreDa
 
   private def getRoomParticipation(request: JoinOrLeaveRoomRequest): Observable[Participation] =
     query(selectParticipationByKey, request)
-      .map { resultSet =>
-        if (resultSet.getResults.isEmpty) {
-          throw ParticipationNotFoundException(request.username, request.name)
-        } else {
-          resultSet.getRows.head
-        }
-      }
+      .map(foldResult(throw ParticipationNotFoundException(request.username, request.name))(_.getRows.head))
 
   override def sendMessage(request: SendMessageRequest): Observable[Message] = execute(insertMessageQuery, request)
     .flatMap(_ => Observable.just(request))
-    
+
   override def getRoomParticipations(request: GetRoomParticipationsRequest): Observable[List[Participation]] = {
     query(selectParticipationsByRoomName, request)
-      .map { resultSet =>
-        if (resultSet.getResults.isEmpty) {
-          throw ParticipationsNotFoundException(request.name)
-        } else {
-          resultSet.getRows
-            .map(json => jsonObjectToParticipation(json))
-            .toList
-        }
-      }
+      .map(foldResult(throw ParticipationsNotFoundException(request.name))(_.getRows
+        .map(jsonObjectToParticipation)
+        .toList))
   }
-  
+
   override def getParticipationsByUsername(request: GetUserParticipationsRequest): Observable[List[Room]] =
     query(selectParticipationsByUsername, request)
-      .map { resultSet =>
-        if (resultSet.getResults.isEmpty) {
-          List()
-        } else {
-          resultSet.getRows.map(jsonObjectToRoom).toList
-        }
-      }
+      .map(foldResult[List[Room]](List())(_.getRows.map(jsonObjectToRoom).toList))
 
   override def getMessages(request: GetMessagesRequest): Observable[List[Message]] =
     query(selectMessagesByRoomName, request)
-    .map { resultSet =>
-      if (resultSet.getResults.isEmpty) {
-        List()
-      } else {
-        resultSet.getRows.foreach(row => println(row.encodePrettily()))
-        resultSet.getRows.map(jsonObjectToMessage).toList
-      }
-    }
+    .map(foldResult[List[Message]](List())(_.getRows
+      .map(jsonObjectToMessage)
+      .toList))
 }
 
 private[impl] object RoomDataStoreDatabase {

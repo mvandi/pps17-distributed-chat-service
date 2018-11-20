@@ -1,6 +1,6 @@
 package it.unibo.dcs.commons
 
-import Configurator.toOp
+import it.unibo.dcs.commons.Configurator.toOp
 
 final class Configurator[T] private (private[this] val op: T => T) {
 

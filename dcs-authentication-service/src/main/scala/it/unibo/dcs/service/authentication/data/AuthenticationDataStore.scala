@@ -1,6 +1,7 @@
 package it.unibo.dcs.service.authentication.data
 
 import java.util.Date
+
 import rx.lang.scala.Observable
 
 /** Structure that allows access to authentication info by many possible different means
@@ -22,13 +23,6 @@ trait AuthenticationDataStore {
     * @param token the jwt token of the user
     * @return an empty observable stream */
   def deleteUser(username: String, token: String): Observable[Unit]
-
-  /**
-    * It checks that the provided username already exists
-    *
-    * @param username the username of the user
-    * @return an empty observable stream */
-  def checkUserExistence(username: String): Observable[Unit]
 
   /**
     * It checks that the provided user credentials are correct

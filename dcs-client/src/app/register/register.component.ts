@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { RegisterRequest } from '../requests';
-import { AuthService } from '../service/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {RegisterRequest} from '../requests';
+import {AuthService} from '../service/auth.service';
+import {Toast} from "../toast-notify";
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
       user => {},
       err => {
         const error = err.error.error;
-        alert("Registration failed! \n" + error.type + " error");
+        Toast.toast("Registration failed! \n" + error.type + " error. \n Make sure to fill correctly all fields.");
         console.error(err);
         this.request.password = '';
         this.request.passwordConfirm = '';

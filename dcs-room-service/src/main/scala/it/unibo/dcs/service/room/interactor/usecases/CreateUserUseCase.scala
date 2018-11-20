@@ -17,3 +17,21 @@ final class CreateUserUseCase(threadExecutor: ThreadExecutor,
     createUserValidation(request).flatMap(_ => roomRepository.createUser(request))
 
 }
+
+/** Companion object */
+object CreateUserUseCase {
+
+  /** Factory method to create the use case
+    *
+    * @param threadExecutor      thread executor that will perform the subscription
+    * @param postExecutionThread thread that will be notified of the subscription result
+    * @param roomRepository      room repository reference
+    * @param validation          validation reference
+    * @return                    an instantiation of the class
+    */
+  def apply(threadExecutor: ThreadExecutor, postExecutionThread: PostExecutionThread,
+            roomRepository: RoomRepository, validation: CreateUserValidation): CreateUserUseCase = {
+    new CreateUserUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+  }
+
+}

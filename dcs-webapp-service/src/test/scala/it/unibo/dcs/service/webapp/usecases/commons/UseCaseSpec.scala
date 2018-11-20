@@ -2,15 +2,16 @@ package it.unibo.dcs.service.webapp.usecases.commons
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.webapp.interaction.Requests.CheckTokenRequest
 import it.unibo.dcs.service.webapp.model.{Message, Participation, Room, User}
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 
 /**
   * Abstract class that encapsulates the objects used by more than one Use Case test.
   */
-abstract class UseCaseSpec extends FlatSpec with MockFactory with OneInstancePerTest {
+abstract class UseCaseSpec extends JUnitSpec with MockFactory with OneInstancePerTest {
 
   /** ----------------- Model instances ---------------------------------------------------- */
   /** Users */
@@ -26,8 +27,8 @@ abstract class UseCaseSpec extends FlatSpec with MockFactory with OneInstancePer
   protected val rooms = List(Room("Room1"), Room("Room2"), Room("Room3"))
 
   /** Participations */
-  protected val participation = Participation(new Date(), room, user.username)
-  protected val secondParticipation = Participation(new Date(), room, secondUser.username)
+  protected val participation = Participation(room, user.username, new Date())
+  protected val secondParticipation = Participation(room, secondUser.username, new Date())
   protected val participations = Set(participation, secondParticipation)
 
   /** Messages */

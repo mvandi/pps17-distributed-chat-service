@@ -1,8 +1,6 @@
 package it.unibo.dcs.service.user.interactor.usecases
 
-import io.vertx.scala.core.Context
-import it.unibo.dcs.commons.RxHelper
-import it.unibo.dcs.commons.interactor.{ThreadExecutorExecutionContext, UseCase}
+import it.unibo.dcs.commons.interactor.UseCase
 import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExecutor}
 import it.unibo.dcs.service.user.interactor.validations.ValidateUserCreation
 import it.unibo.dcs.service.user.model.User
@@ -21,20 +19,21 @@ final class CreateUserUseCase(private[this] val threadExecutor: ThreadExecutor,
 
 }
 
-/*
+
 /** Companion object */
 object CreateUserUseCase {
 
   /** Factory method to create the use case
     *
-    * @param userRepository user repository reference
-    * @param ctx            Vertx context
-    * @return               the use case object */
-  def create(userRepository: UserRepository)(implicit ctx: Context): CreateUserUseCase = {
-    val threadExecutor: ThreadExecutor = ThreadExecutorExecutionContext(ctx.owner())
-    val postExecutionThread: PostExecutionThread = PostExecutionThread(RxHelper.scheduler(ctx))
-    new CreateUserUseCase(threadExecutor, postExecutionThread, userRepository)
+    * @param threadExecutor      thread executor that will perform the subscription
+    * @param postExecutionThread thread that will be notified of the subscription result
+    * @param userRepository      user repository reference
+    * @param validation          validation reference
+    * @return                    an instantiation of the class
+    */
+  def apply(threadExecutor: ThreadExecutor, postExecutionThread: PostExecutionThread,
+            userRepository: UserRepository, validation: ValidateUserCreation): CreateUserUseCase = {
+    new CreateUserUseCase(threadExecutor, postExecutionThread, userRepository, validation)
   }
 
 }
-*/

@@ -3,7 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {NgModule} from '@angular/core';
 
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import {LayoutModule} from '@angular/cdk/layout';
 import {OverlayModule} from '@angular/cdk/overlay';
@@ -19,9 +19,8 @@ import {ChatService} from './service/chat.service';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {FormsModule} from '@angular/forms';
-import {ServerInterceptor} from "./server-interceptor";
-import { WindowRef } from './providers/WindowRef';
-import { UserService } from './service/user.service';
+import {WindowRef} from './providers/WindowRef';
+import {UserService} from './service/user.service';
 
 export const createTranslateLoader = (http) => {
   // for development

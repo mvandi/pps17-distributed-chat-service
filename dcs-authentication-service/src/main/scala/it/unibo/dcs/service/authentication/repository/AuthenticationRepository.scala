@@ -22,11 +22,6 @@ trait AuthenticationRepository {
   def deleteUser(username: String, token: String): Observable[Unit]
 
   /** @param username
-    * Username needed to check that it exists
-    * @return an empty observable stream */
-  def checkUserExistence(username: String): Observable[Unit]
-
-  /** @param username
     * Username needed to check the credentials
     * @param password
     * * User's password needed to check the credentials

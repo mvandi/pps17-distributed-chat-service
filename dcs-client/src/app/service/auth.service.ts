@@ -26,6 +26,10 @@ export class AuthService {
     return this._user;
   }
 
+  setUser(user: User): void {
+    this._user = user;
+  }
+
   get authOptions() {
     return new HttpHeaders({
         'Authorization' : 'Bearer ' + this.user.token

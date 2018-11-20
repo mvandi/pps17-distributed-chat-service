@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TopnavComponent } from './topnav.component';
+import {TopnavComponent} from './topnav.component';
 
 describe('TopnavComponent', () => {
   let component: TopnavComponent;

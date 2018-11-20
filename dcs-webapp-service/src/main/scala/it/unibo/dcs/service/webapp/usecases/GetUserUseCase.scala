@@ -4,7 +4,7 @@ import io.vertx.scala.core.Context
 import it.unibo.dcs.commons.RxHelper
 import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExecutor}
 import it.unibo.dcs.commons.interactor.{ThreadExecutorExecutionContext, UseCase}
-import it.unibo.dcs.service.webapp.interaction.Requests.{CheckTokenRequest, GetUserRequest}
+import it.unibo.dcs.service.webapp.interaction.Requests.GetUserRequest
 import it.unibo.dcs.service.webapp.interaction.Results.GetUserResult
 import it.unibo.dcs.service.webapp.repositories.{AuthenticationRepository, UserRepository}
 import rx.lang.scala.Observable

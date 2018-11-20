@@ -2,8 +2,8 @@ package it.unibo.dcs.service.webapp.usecases
 
 import io.vertx.scala.core.Context
 import it.unibo.dcs.commons.RxHelper
-import it.unibo.dcs.commons.interactor.{ThreadExecutorExecutionContext, UseCase}
 import it.unibo.dcs.commons.interactor.executor.{PostExecutionThread, ThreadExecutor}
+import it.unibo.dcs.commons.interactor.{ThreadExecutorExecutionContext, UseCase}
 import it.unibo.dcs.service.webapp.interaction.Requests.{CheckTokenRequest, SendMessageRequest}
 import it.unibo.dcs.service.webapp.interaction.Results.SendMessageResult
 import it.unibo.dcs.service.webapp.repositories.{AuthenticationRepository, RoomRepository}

@@ -3,7 +3,6 @@ package it.unibo.dcs.commons
 import java.text.SimpleDateFormat
 import java.util.Date
 
-import scala.language.implicitConversions
 import com.google.gson.GsonBuilder
 
 import scala.language.implicitConversions

@@ -156,97 +156,21 @@ package object exceptions {
         if (error.containsKey(KEY_TYPE)) {
           error.getString(KEY_TYPE) match {
             case ServiceUnavailable =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_SERVICE_NAME)) {
-                  val serviceName = extras.getString(KEY_SERVICE_NAME)
-                  throw ServiceUnavailableException(serviceName)
-                }
-                throw KeyRequiredException(KEY_SERVICE_NAME, ServiceUnavailable)
-              }
-              throw KeyRequiredException(KEY_USERNAME, ServiceUnavailable)
+              handleServiceUnavailableExceptions(error)
             case UserNotFound =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_USERNAME)) {
-                  val username = extras.getString(KEY_USERNAME)
-                  throw UserNotFoundException(username)
-                }
-                throw InternalException(s"Missing key '$KEY_USERNAME' in $UserNotFound error")
-              }
-              throw KeyRequiredException(KEY_NAME, UserNotFound)
+              handleUserNotFoundExceptions(error)
             case UserAlreadyExists =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_USERNAME)) {
-                  val username = extras.getString(KEY_USERNAME)
-                  throw UserAlreadyExistsException(username)
-                }
-                throw KeyRequiredException(KEY_USERNAME, UserAlreadyExists)
-              }
-              throw KeyRequiredException(KEY_NAME, UserAlreadyExists)
+              handleUserAlreadyExistsExceptions(error)
             case RoomNotFound =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_NAME)) {
-                  val name = extras.getString(KEY_NAME)
-                  throw RoomNotFoundException(name)
-                }
-                throw KeyRequiredException(KEY_NAME, RoomNotFound)
-              }
-              throw KeyRequiredException(KEY_EXTRAS, RoomNotFound)
+              handleRoomNotFoundExceptions(error)
             case RoomAlreadyExists =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_NAME)) {
-                  val name = extras.getString(KEY_NAME)
-                  throw RoomAlreadyExistsException(name)
-                }
-                throw KeyRequiredException(KEY_NAME, RoomAlreadyExists)
-              }
-              throw KeyRequiredException(KEY_EXTRAS, RoomAlreadyExists)
+              handleRoomAlreadyExistsExceptions(error)
             case ParticipationNotFound =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_NAME)) {
-                  val name = extras.getString(KEY_NAME)
-                  if (extras.containsKey(KEY_USERNAME)) {
-                    val username = extras.getString(KEY_USERNAME)
-                    throw ParticipationNotFoundException(username, name)
-                  }
-                  throw KeyRequiredException(KEY_USERNAME, ParticipationNotFound)
-                }
-                throw KeyRequiredException(KEY_NAME, ParticipationNotFound)
-              }
-              throw KeyRequiredException(KEY_EXTRAS, ParticipationNotFound)
+              handleParticipationNotFoundExceptions(error)
             case ParticipationsNotFound =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_NAME)) {
-                  val name = extras.getString(KEY_NAME)
-                  if (extras.containsKey(KEY_USERNAME)) {
-                    val username = extras.getString(KEY_USERNAME)
-                    throw ParticipationNotFoundException(username, name)
-                  }
-                  throw KeyRequiredException(KEY_USERNAME, ParticipationsNotFound)
-                }
-                throw KeyRequiredException(KEY_NAME, ParticipationsNotFound)
-              }
-              throw KeyRequiredException(KEY_EXTRAS, ParticipationsNotFound)
+              handleParticipationsNotFoundExceptions(error)
             case ParticipationAlreadyExists =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_NAME)) {
-                  val name = extras.getString(KEY_NAME)
-                  if (extras.containsKey(KEY_USERNAME)) {
-                    val username = extras.getString(KEY_USERNAME)
-                    throw ParticipationAlreadyExistsException(username, name)
-                  }
-                  throw KeyRequiredException(KEY_USERNAME, ParticipationAlreadyExists)
-                }
-                throw KeyRequiredException(KEY_NAME, ParticipationAlreadyExists)
-              }
-              throw KeyRequiredException(KEY_EXTRAS, ParticipationAlreadyExists)
+              handleParticipationAlreadyExistsExceptions(error)
             case WrongUsernameOrPassword =>
               throw WrongUsernameOrPasswordException
             case UsernameRequired =>
@@ -266,14 +190,7 @@ package object exceptions {
             case MessageContentRequired =>
               throw MessageContentRequiredExpection
             case Internal =>
-              if (error.containsKey(KEY_EXTRAS)) {
-                val extras = error.getJsonObject(KEY_EXTRAS)
-                if (extras.containsKey(KEY_DESCRIPTION)) {
-                  val description = extras.getString(KEY_DESCRIPTION)
-                  throw InternalException(description)
-                }
-              }
-              throw InternalException()
+              handleInternalExceptions(error)
           }
           throw InternalException(s"Missing key '$KEY_TYPE' in DCS error")
         }
@@ -306,6 +223,125 @@ package object exceptions {
         HttpResponseStatus.UNAUTHORIZED
       case _ => HttpResponseStatus.INTERNAL_SERVER_ERROR
     }
+  }
+
+  private def handleInternalExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_DESCRIPTION)) {
+        val description = extras.getString(KEY_DESCRIPTION)
+        throw InternalException(description)
+      }
+    }
+    throw InternalException()
+  }
+
+  private def handleParticipationAlreadyExistsExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_NAME)) {
+        val name = extras.getString(KEY_NAME)
+        if (extras.containsKey(KEY_USERNAME)) {
+          val username = extras.getString(KEY_USERNAME)
+          throw ParticipationAlreadyExistsException(username, name)
+        }
+        throw KeyRequiredException(KEY_USERNAME, ParticipationAlreadyExists)
+      }
+      throw KeyRequiredException(KEY_NAME, ParticipationAlreadyExists)
+    }
+    throw KeyRequiredException(KEY_EXTRAS, ParticipationAlreadyExists)
+  }
+
+  private def handleParticipationsNotFoundExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_NAME)) {
+        val name = extras.getString(KEY_NAME)
+        if (extras.containsKey(KEY_USERNAME)) {
+          val username = extras.getString(KEY_USERNAME)
+          throw ParticipationNotFoundException(username, name)
+        }
+        throw KeyRequiredException(KEY_USERNAME, ParticipationsNotFound)
+      }
+      throw KeyRequiredException(KEY_NAME, ParticipationsNotFound)
+    }
+    throw KeyRequiredException(KEY_EXTRAS, ParticipationsNotFound)
+  }
+
+  private def handleParticipationNotFoundExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_NAME)) {
+        val name = extras.getString(KEY_NAME)
+        if (extras.containsKey(KEY_USERNAME)) {
+          val username = extras.getString(KEY_USERNAME)
+          throw ParticipationNotFoundException(username, name)
+        }
+        throw KeyRequiredException(KEY_USERNAME, ParticipationNotFound)
+      }
+      throw KeyRequiredException(KEY_NAME, ParticipationNotFound)
+    }
+    throw KeyRequiredException(KEY_EXTRAS, ParticipationNotFound)
+  }
+
+  private def handleRoomAlreadyExistsExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_NAME)) {
+        val name = extras.getString(KEY_NAME)
+        throw RoomAlreadyExistsException(name)
+      }
+      throw KeyRequiredException(KEY_NAME, RoomAlreadyExists)
+    }
+    throw KeyRequiredException(KEY_EXTRAS, RoomAlreadyExists)
+  }
+
+  private def handleRoomNotFoundExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_NAME)) {
+        val name = extras.getString(KEY_NAME)
+        throw RoomNotFoundException(name)
+      }
+      throw KeyRequiredException(KEY_NAME, RoomNotFound)
+    }
+    throw KeyRequiredException(KEY_EXTRAS, RoomNotFound)
+  }
+
+  private def handleUserAlreadyExistsExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_USERNAME)) {
+        val username = extras.getString(KEY_USERNAME)
+        throw UserAlreadyExistsException(username)
+      }
+      throw KeyRequiredException(KEY_USERNAME, UserAlreadyExists)
+    }
+    throw KeyRequiredException(KEY_NAME, UserAlreadyExists)
+  }
+
+  private def handleUserNotFoundExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_USERNAME)) {
+        val username = extras.getString(KEY_USERNAME)
+        throw UserNotFoundException(username)
+      }
+      throw InternalException(s"Missing key '$KEY_USERNAME' in $UserNotFound error")
+    }
+    throw KeyRequiredException(KEY_NAME, UserNotFound)
+  }
+
+  private def handleServiceUnavailableExceptions(error: JsonObject) = {
+    if (error.containsKey(KEY_EXTRAS)) {
+      val extras = error.getJsonObject(KEY_EXTRAS)
+      if (extras.containsKey(KEY_SERVICE_NAME)) {
+        val serviceName = extras.getString(KEY_SERVICE_NAME)
+        throw ServiceUnavailableException(serviceName)
+      }
+      throw KeyRequiredException(KEY_SERVICE_NAME, ServiceUnavailable)
+    }
+    throw KeyRequiredException(KEY_USERNAME, ServiceUnavailable)
   }
 
   def bodyAsJsonObject[T](default: => JsonObject = Json.emptyObj()): HttpResponse[T] => JsonObject = response =>

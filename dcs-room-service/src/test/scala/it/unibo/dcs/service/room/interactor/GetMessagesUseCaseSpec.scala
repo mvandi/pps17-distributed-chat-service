@@ -2,19 +2,20 @@ package it.unibo.dcs.service.room.interactor
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.room.Mocks.{postExecutionThread, roomRepository, threadExecutor}
-import it.unibo.dcs.service.room.interactor.usecases.{GetMessagesUseCase}
-import it.unibo.dcs.service.room.interactor.validations.{GetMessagesValidation}
+import it.unibo.dcs.service.room.interactor.usecases.GetMessagesUseCase
+import it.unibo.dcs.service.room.interactor.validations.GetMessagesValidation
 import it.unibo.dcs.service.room.model.{Message, Room}
-import it.unibo.dcs.service.room.request.{GetMessagesRequest}
-import it.unibo.dcs.service.room.validator.{GetMessagesValidator}
+import it.unibo.dcs.service.room.request.GetMessagesRequest
+import it.unibo.dcs.service.room.validator.GetMessagesValidator
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 import rx.lang.scala.{Observable, Subscriber}
 
-class GetMessagesUseCaseSpec  extends FlatSpec with MockFactory with OneInstancePerTest {
-  val validation = new GetMessagesValidation(threadExecutor, postExecutionThread, GetMessagesValidator())
-  private val getMessagesUseCase = new GetMessagesUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+class GetMessagesUseCaseSpec extends JUnitSpec with MockFactory with OneInstancePerTest {
+  val validation = GetMessagesValidation(threadExecutor, postExecutionThread, GetMessagesValidator())
+  private val getMessagesUseCase = GetMessagesUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
 
   private val roomName = "Test room"
   private val username = "martynha"
@@ -26,7 +27,7 @@ class GetMessagesUseCaseSpec  extends FlatSpec with MockFactory with OneInstance
 
   val request = GetMessagesRequest(roomName)
 
-  val subscriber = stub[Subscriber[List[Message]]]
+  val subscriber: Subscriber[List[Message]] = stub[Subscriber[List[Message]]]
 
   it should "Get all the messages for a given room" in {
     //Given

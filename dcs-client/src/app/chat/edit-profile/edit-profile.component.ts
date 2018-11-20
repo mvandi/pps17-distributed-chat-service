@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../service/user.service';
 import {AuthService} from '../../service/auth.service';
 import {Location} from '@angular/common';
+import {Toast} from "../../toast-notify";
 
 @Component({
   selector: 'app-edit-profile',
@@ -43,10 +44,23 @@ export class EditProfileComponent implements OnInit {
       },
       err => {
         console.error(err);
-        alert('Profile edit failed! ' + err.error.error.type);
+        Toast.toast('Profile edit failed! ' + err.error.error.type);
       },
       () => {
-        alert('The user profile has been successfully edited');
+        // update of the current user locally saved
+        const user = {
+          username: this.request.username,
+          firstName: this.request.firstName,
+          lastName: this.request.lastName,
+          visible: this.request.visible,
+          bio: this.request.bio,
+          lastSeen: this.auth.user.lastSeen,
+          token: this.auth.user.token,
+          status: this.auth.user.status
+        };
+        this.auth.setUser(user);
+
+        Toast.toast('The user profile has been successfully edited');
         this._location.back();
       }
     );

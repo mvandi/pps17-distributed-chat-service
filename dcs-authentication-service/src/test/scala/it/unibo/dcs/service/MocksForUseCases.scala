@@ -6,7 +6,7 @@ import it.unibo.dcs.service.authentication.repository.AuthenticationRepository
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.FlatSpec
 
-object MocksForUseCases extends FlatSpec with MockFactory {
+object MocksForUseCases extends MockFactory {
 
   val threadExecutor: ThreadExecutor = mock[ThreadExecutor]
   val postExecutionThread: PostExecutionThread = mock[PostExecutionThread]

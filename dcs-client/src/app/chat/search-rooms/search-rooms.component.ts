@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ChatService } from '../../service/chat.service';
-import { Router } from '@angular/router';
-import { remove } from 'lodash';
+import {Component, Input, OnInit} from '@angular/core';
+import {ChatService} from '../../service/chat.service';
+import {Router} from '@angular/router';
+import {remove} from 'lodash';
 
-import { Room } from '../../model';
+import {Room} from '../../model';
 
 @Component({
   selector: 'app-search-rooms',

@@ -2,6 +2,7 @@ package it.unibo.dcs.service.room.interactor
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.room.Mocks.{postExecutionThread, roomRepository, threadExecutor}
 import it.unibo.dcs.service.room.interactor.usecases.LeaveRoomUseCase
 import it.unibo.dcs.service.room.interactor.validations.LeaveRoomValidation
@@ -9,14 +10,14 @@ import it.unibo.dcs.service.room.model.{Participation, Room}
 import it.unibo.dcs.service.room.request.LeaveRoomRequest
 import it.unibo.dcs.service.room.validator.LeaveRoomValidator
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.{FlatSpec, OneInstancePerTest}
+import org.scalatest.OneInstancePerTest
 import rx.lang.scala.{Observable, Subscriber}
 
-final class LeaveRoomUseCaseSpec extends FlatSpec with MockFactory with OneInstancePerTest {
+final class LeaveRoomUseCaseSpec extends JUnitSpec with MockFactory with OneInstancePerTest {
 
   private val leaveRoomUseCase = {
-    val validation = new LeaveRoomValidation(threadExecutor, postExecutionThread, LeaveRoomValidator())
-    new LeaveRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+    val validation = LeaveRoomValidation(threadExecutor, postExecutionThread, LeaveRoomValidator())
+    LeaveRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
   }
 
   private val request = LeaveRoomRequest("Test room", "martynha")

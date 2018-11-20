@@ -1,13 +1,6 @@
-import { Location } from '@angular/common';
-
-import {
-  CanActivate,
-  Router,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot
-} from '@angular/router';
-import { Injectable } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {Injectable} from '@angular/core';
+import {AuthService} from '../service/auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

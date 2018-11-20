@@ -2,6 +2,7 @@ package it.unibo.dcs.service.user.interactor
 
 import java.util.Date
 
+import it.unibo.dcs.commons.test.JUnitSpec
 import it.unibo.dcs.service.user.Mocks.{postExecutionThread, threadExecutor, userRepository}
 import it.unibo.dcs.service.user.interactor.usecases.EditUserUseCase
 import it.unibo.dcs.service.user.interactor.validations.ValidateUserEditing
@@ -9,10 +10,9 @@ import it.unibo.dcs.service.user.model.User
 import it.unibo.dcs.service.user.request.{EditUserRequest, GetUserRequest}
 import it.unibo.dcs.service.user.validator.UserEditingValidator
 import org.scalamock.scalatest.MockFactory
-import org.scalatest.FlatSpec
 import rx.lang.scala.{Observable, Subscriber}
 
-class EditUserUseCaseSpec extends FlatSpec with MockFactory {
+class EditUserUseCaseSpec extends JUnitSpec with MockFactory {
 
   private val request = EditUserRequest("martynha", "Martina", "Magnani", "bio", visible = true)
   private val expectedUser =
@@ -22,8 +22,8 @@ class EditUserUseCaseSpec extends FlatSpec with MockFactory {
 
   private val editProfileUseCase = {
     val validator = UserEditingValidator(userRepository)
-    val validation = new ValidateUserEditing(threadExecutor, postExecutionThread, validator)
-    new EditUserUseCase(threadExecutor, postExecutionThread, userRepository, validation)
+    val validation = ValidateUserEditing(threadExecutor, postExecutionThread, validator)
+    EditUserUseCase(threadExecutor, postExecutionThread, userRepository, validation)
   }
 
   it should "edit the specified profile when the use case is executed" in {

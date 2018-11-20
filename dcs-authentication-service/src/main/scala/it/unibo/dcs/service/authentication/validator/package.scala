@@ -54,5 +54,3 @@ package object validator {
     jwtTokenDecoder.getUsernameFromToken(token) equals username
 
 }
-
-

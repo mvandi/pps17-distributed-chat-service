@@ -38,9 +38,8 @@ package object subscriber {
     with ErrorSubscriber with Logging {
 
     override def onNext(participation: Participation): Unit = {
-      val json = Json.obj(("name", participation.room.name), ("username", participation.username))
-      log.info(s"Answering with : $json")
-      response.setStatus(HttpResponseStatus.OK).end(json.encode())
+      log.info(s"Answering with: $participation")
+      response.setStatus(HttpResponseStatus.OK).endWith(participation)
     }
   }
 

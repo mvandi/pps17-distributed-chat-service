@@ -16,6 +16,11 @@ class JwtTokenDecoder() {
   def getUsernameFromToken(token: String): String =
     getTokenBody(token).getString("sub")
 
+  /**
+    * It decodes a token, obtaining the "issued at" timestamp
+    *
+    * @param token the jwt token
+    * @return a username */
   def getTokenIssuedAtTimestamp(token: String): Int =
     getTokenBody(token).getInteger("iat")
 

@@ -1,0 +1,139 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: Authentication Service API
+  description: A description of the Authentication Service API using OpenAPI Specification.
+
+schemes:
+  - http
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+#host: www.example.com
+#basePath: /
+
+paths:
+  /register:
+    post:
+      summary: Registers a new User.
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: user
+          in: body
+          description: The user to create.
+          schema:
+            required:
+              - username
+              - password
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+          required: true
+      responses:
+        201:
+          description: The user was successfully registered.
+          schema:
+            required:
+              - token
+            properties:
+              token:
+                type: string
+
+  /login:
+    post:
+      summary: Logins a User.
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: user
+          in: body
+          description: The user to login.
+          schema:
+            required:
+              - username
+              - password
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+          required: true
+      responses:
+        200:
+          description: The user was successfully logged in.
+          schema:
+            required:
+              - token
+            properties:
+              token:
+                type: string
+
+  /protected/logout:
+    delete:
+      summary: Logs out a User.
+      security:
+        - Bearer: []
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: user
+          in: body
+          description: The user to log out.
+          schema:
+            required:
+              - username
+            properties:
+              username:
+                type: string
+          required: true
+      responses:
+        200:
+          description: The user was successfully logged out.
+  /protected/verify/{username}:
+    get:
+      summary: Validates a token.
+      security:
+        - Bearer: []
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "username"
+          in: path
+          description: The username of the user for which verify the token for.
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: The token is valid.
+  /protected/users/{username}:
+    delete:
+      summary: Deletes a User.
+      security:
+        - Bearer: []
+      produces:
+        - "application/json"
+      parameters:
+        - name: "username"
+          in: path
+          description: The username of the user to delete.
+          required: true
+          type: "string"
+      responses:
+        204:
+          description: The user was successfully deleted.

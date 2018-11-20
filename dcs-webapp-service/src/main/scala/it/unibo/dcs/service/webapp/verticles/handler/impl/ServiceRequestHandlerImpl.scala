@@ -30,7 +30,7 @@ final class ServiceRequestHandlerImpl(private[this] val eventBus: EventBus,
   private[this] lazy val roomDeleted = eventBus.address(rooms.deleted)
   private[this] lazy val roomJoined = eventBus.address(rooms.joined)
   private[this] lazy val messageSent = eventBus.address(messages.sent)
-  private[this] lazy val roomLeaved = eventBus.address(rooms.left)
+  private[this] lazy val roomLeft = eventBus.address(rooms.left)
   private[this] lazy val roomCreated = eventBus.address(rooms.created)
   private[this] lazy val userOnline = eventBus.address(users.online)
   private[this] lazy val userOffline = eventBus.address(users.offline)
@@ -120,7 +120,7 @@ final class ServiceRequestHandlerImpl(private[this] val eventBus: EventBus,
               userName =>
                 val useCase = LeaveRoomUseCase(authRepository, roomRepository)
                 val request = RoomLeaveRequest(roomName, userName, token)
-                useCase(request, LeaveRoomSubscriber(context.response(), roomLeaved))
+                useCase(request, LeaveRoomSubscriber(context.response(), roomLeft))
             }
         }
     }
@@ -185,26 +185,19 @@ final class ServiceRequestHandlerImpl(private[this] val eventBus: EventBus,
   override def handleGetUser(context: RoutingContext)(implicit ctx: Context): Unit =
     handleRequestParam(context, ParamLabels.usernameLabel) {
       username => {
-        handleRequestToken(context) {
-          token => {
             val useCase = GetUserUseCase(authRepository, userRepository)
             useCase(GetUserRequest(username), GetUserSubscriber(context.response()))
-          }
-        }
       }
     }
 
   override def handleGetMessages(context: RoutingContext)(implicit ctx: Context): Unit =
     handleRequestParam(context, ParamLabels.roomNameLabel) {
       roomName => {
-        handleRequestToken(context) {
-          token => {
             val useCase = GetMessagesUseCase(authRepository, roomRepository)
             useCase(Json.obj((roomNameLabel, roomName)), GetMessagesSubscriber(context.response()))
-          }
-        }
       }
     }
+
   override def handleUserOffline(message: Message[JsonObject])(implicit ctx: Context): Unit = {
     val json = message.body
     val useCase = UserOfflineUseCase(userRepository)

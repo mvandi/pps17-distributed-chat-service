@@ -9,3 +9,16 @@ final class GetRoomsValidation(private[this] val threadExecutor: ThreadExecutor,
                                private[this] val postExecutionThread: PostExecutionThread,
                                private[this] val validator: Validator[GetRoomsRequest])
   extends Validation[GetRoomsRequest](threadExecutor, postExecutionThread, validator)
+
+object GetRoomsValidation {
+
+  /** Factory method to instantiate the class
+    *
+    * @param threadExecutor      thread executor that will perform the subscription
+    * @param postExecutionThread thread that will be notified of the subscription result
+    * @param validator           object containing the rules needed to validate
+    * @return an instantiation of the class */
+  def apply(threadExecutor: ThreadExecutor, postExecutionThread: PostExecutionThread,
+            validator: Validator[GetRoomsRequest]): GetRoomsValidation =
+    new GetRoomsValidation(threadExecutor, postExecutionThread, validator)
+}

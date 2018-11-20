@@ -2,8 +2,6 @@ package it.unibo.dcs.service.webapp.usecases
 
 import it.unibo.dcs.service.webapp.interaction.Requests.{CheckTokenRequest, RoomJoinRequest}
 import it.unibo.dcs.service.webapp.interaction.Results.RoomJoinResult
-import it.unibo.dcs.service.webapp.model.{Participation, Room}
-import it.unibo.dcs.service.webapp.repositories.RoomRepository
 import it.unibo.dcs.service.webapp.usecases.commons.Mocks._
 import it.unibo.dcs.service.webapp.usecases.commons.UseCaseSpec
 import rx.lang.scala.{Observable, Subscriber}

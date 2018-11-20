@@ -1,0 +1,169 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: User Service API
+  description: A description of the User Service API using OpenAPI Specification.
+
+schemes:
+  - http
+
+#host: www.example.com
+#basePath: /
+
+paths:
+  /users:
+    post:
+      summary: Creates a new User.
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: user
+          in: body
+          description: The user to create.
+          schema:
+            required:
+              - username
+              - firstName
+              - lastName
+            properties:
+              username:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+          required: true
+      responses:
+        201:
+          description: The user was successfully created.
+          schema:
+            required:
+              - username
+              - firstName
+              - lastName
+              - bio
+              - visible
+              - lastSeen
+            properties:
+              username:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              bio:
+                type: string
+              visible:
+                type: boolean
+              lastSeen:
+                type: string
+                format: date-time
+  /users/{username}:
+    get:
+      summary: Retrieves a user given its username.
+      produces:
+        - "application/json"
+      parameters:
+        - name: "username"
+          in: path
+          description: The username of the user to delete.
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: The user retrieved.
+          schema:
+            required:
+              - username
+              - firstName
+              - lastName
+              - bio
+              - visible
+              - lastSeen
+            properties:
+              username:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              bio:
+                type: string
+              visible:
+                type: boolean
+              lastSeen:
+                type: string
+                format: date-time
+    put:
+      summary: Updates a user.
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "username"
+          in: path
+          description: The username of the user to update.
+          required: true
+          type: "string"
+        - name: user
+          in: body
+          description: The user fields to update.
+          schema:
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              bio:
+                type: string
+              visible:
+                type: boolean
+          required: true
+      responses:
+        200:
+          description: The user was successfully updated.
+          schema:
+            required:
+              - username
+              - firstName
+              - lastName
+              - bio
+              - visible
+              - lastSeen
+            properties:
+              username:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              bio:
+                type: string
+              visible:
+                type: boolean
+              lastSeen:
+                type: string
+                format: date-time
+    delete:
+      summary: Deletes a User.
+      produces:
+        - "application/json"
+      parameters:
+        - name: "username"
+          in: path
+          description: The username of the user to delete.
+          required: true
+          type: "string"
+      responses:
+        204:
+          description: The user was successfully deleted.
+          schema:
+            required:
+              - username
+            properties:
+              username:
+                type: string

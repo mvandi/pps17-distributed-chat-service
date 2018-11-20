@@ -4,8 +4,8 @@ import io.netty.handler.codec.http.HttpResponseStatus
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.ext.auth.jwt.{JWTAuth, JWTAuthOptions}
-import io.vertx.scala.ext.web.{Router, RoutingContext}
 import io.vertx.scala.ext.web.handler.JWTAuthHandler
+import io.vertx.scala.ext.web.{Router, RoutingContext}
 import it.unibo.dcs.commons.VertxWebHelper.{getTokenFromHeader, respond}
 import it.unibo.dcs.service.authentication.repository.AuthenticationRepository
 

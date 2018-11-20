@@ -64,18 +64,18 @@ final class UserVerticle(private[this] val userRepository: UserRepository,
     val threadExecutor: ThreadExecutor = ThreadExecutorExecutionContext(vertx)
     val postExecutionThread: PostExecutionThread = PostExecutionThread(RxHelper.scheduler(this.ctx))
 
-    val getUserUseCase = new GetUserUseCase(threadExecutor, postExecutionThread, userRepository)
+    val getUserUseCase = GetUserUseCase(threadExecutor, postExecutionThread, userRepository)
 
     val createUserUseCase = {
       val validator: Validator[CreateUserRequest] = UserCreationValidator(userRepository)
-      val validation = new ValidateUserCreation(threadExecutor, postExecutionThread, validator)
-      new CreateUserUseCase(threadExecutor, postExecutionThread, userRepository, validation)
+      val validation = ValidateUserCreation(threadExecutor, postExecutionThread, validator)
+      CreateUserUseCase(threadExecutor, postExecutionThread, userRepository, validation)
     }
 
     val editUserUseCase = {
       val validator: Validator[EditUserRequest] = UserEditingValidator(userRepository)
-      val validation = new ValidateUserEditing(threadExecutor, postExecutionThread, validator)
-      new EditUserUseCase(threadExecutor, postExecutionThread, userRepository, validation)
+      val validation = ValidateUserEditing(threadExecutor, postExecutionThread, validator)
+      EditUserUseCase(threadExecutor, postExecutionThread, userRepository, validation)
     }
 
     val updateUserAccessUseCase = new UpdateUserAccessUseCase(threadExecutor, postExecutionThread, userRepository)

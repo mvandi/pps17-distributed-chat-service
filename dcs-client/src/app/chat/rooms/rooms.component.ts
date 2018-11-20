@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ChatService } from '../../service/chat.service';
-import { Router } from '@angular/router';
-import { remove } from 'lodash';
+import {Component, OnInit} from '@angular/core';
+import {ChatService} from '../../service/chat.service';
+import {Router} from '@angular/router';
+import {remove} from 'lodash';
 
-import { Room, Participation } from '../../model';
-import { AuthService } from '../../service/auth.service';
+import {Participation, Room} from '../../model';
+import {AuthService} from '../../service/auth.service';
 
-import { filter } from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-rooms',
@@ -25,22 +25,14 @@ export class RoomsComponent implements OnInit {
 
   ngOnInit() {
     console.log('Getting user rooms...');
-    /*
     const participationFilter = filter<Participation>(p => p.username === this.auth.user.username);
-
-    this.chat.onRoomJoined()
-      .pipe(participationFilter)
-      .subscribe(participation => {
-        console.log("received participation for room: " + participation.room.name);
-        this.rooms.unshift(participation.room);
-      });
 
     this.chat.onRoomLeft()
       .pipe(participationFilter)
       .subscribe(participation => {
         this.removeRoom(participation.room.name);
       });
-    */
+
     this.chat.getUserParticipations()
       .subscribe(rooms => this.rooms = rooms);
 

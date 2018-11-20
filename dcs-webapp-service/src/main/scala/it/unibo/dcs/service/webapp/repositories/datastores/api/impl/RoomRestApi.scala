@@ -3,7 +3,9 @@ package it.unibo.dcs.service.webapp.repositories.datastores.api.impl
 import java.util.Date
 
 import io.vertx.lang.scala.json.{Json, JsonArray, JsonObject}
+import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
 import it.unibo.dcs.commons.RxHelper.Implicits.RichObservable
+import it.unibo.dcs.commons.dataaccess.Implicits._
 import it.unibo.dcs.commons.service.{AbstractApi, HttpEndpointDiscovery}
 import it.unibo.dcs.exceptions.{InternalException, RoomServiceErrorException, bodyAsJsonArray, bodyAsJsonObject}
 import it.unibo.dcs.service.webapp.gson
@@ -15,8 +17,6 @@ import it.unibo.dcs.service.webapp.repositories.datastores.api.RoomApi
 import it.unibo.dcs.service.webapp.repositories.datastores.api.impl.RoomRestApi.Implicits._
 import it.unibo.dcs.service.webapp.repositories.datastores.api.impl.RoomRestApi._
 import rx.lang.scala.Observable
-import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
-import it.unibo.dcs.commons.dataaccess.Implicits._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.language.implicitConversions

@@ -5,10 +5,10 @@ import java.net.InetAddress
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.core.{DeploymentOptions, Vertx, VertxOptions}
 import io.vertx.servicediscovery.Record
-import it.unibo.dcs.commons.VertxHelper.Implicits._
-import it.unibo.dcs.commons.service.codecs.RecordMessageCodec
 import it.unibo.dcs.commons.VertxHelper
+import it.unibo.dcs.commons.VertxHelper.Implicits._
 import it.unibo.dcs.commons.logging.Logging
+import it.unibo.dcs.commons.service.codecs.RecordMessageCodec
 import it.unibo.dcs.service.webapp.verticles.{HearthbeatVerticle, WebAppVerticle}
 
 import scala.language.implicitConversions

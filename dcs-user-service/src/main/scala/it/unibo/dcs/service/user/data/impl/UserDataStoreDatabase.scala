@@ -9,6 +9,7 @@ import it.unibo.dcs.commons.RxHelper.Implicits.RichObservable
 import it.unibo.dcs.commons.dataaccess.DataStoreDatabase
 import it.unibo.dcs.commons.dataaccess.Implicits.dateToString
 import it.unibo.dcs.commons.dataaccess.ResultSetHelper.Implicits.RichResultSet
+import it.unibo.dcs.commons.dataaccess.ResultSetHelper.foldResult
 import it.unibo.dcs.exceptions.{UserAlreadyExistsException, UserNotFoundException}
 import it.unibo.dcs.service.user.data.UserDataStore
 import it.unibo.dcs.service.user.data.impl.Implicits.userDtoToUser
@@ -25,21 +26,11 @@ final class UserDataStoreDatabase(connection: SQLConnection) extends DataStoreDa
 
   override def checkIfUserExists(request: GetUserRequest): Observable[Unit] =
     query(selectUserByUsername, request)
-      .map { resultSet =>
-        if (resultSet.getResults.nonEmpty) {
-          throw UserAlreadyExistsException(request.username)
-        }
-      }
+    .map(foldResult()(throw UserAlreadyExistsException(request.username)))
 
   override def getUserByUsername(request: GetUserRequest): Observable[User] =
     query(selectUserByUsername, request)
-      .map { resultSet =>
-        if (resultSet.getResults.isEmpty) {
-          throw UserNotFoundException(request.username)
-        } else {
-          resultSet.getRows.head
-        }
-      }
+      .map(foldResult(throw UserNotFoundException(request.username))(_.getRows.head))
 
   override def createUser(request: CreateUserRequest): Observable[User] =
     update(insertUser, request)

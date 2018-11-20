@@ -3,8 +3,8 @@ package it.unibo.dcs.service.authentication.server
 import io.vertx.core
 import io.vertx.core.{AbstractVerticle, Context}
 import io.vertx.scala.ext.auth.jwt.JWTAuth
-import io.vertx.scala.ext.web.handler.BodyHandler
 import io.vertx.scala.ext.web.Router
+import io.vertx.scala.ext.web.handler.BodyHandler
 import it.unibo.dcs.commons.RxHelper
 import it.unibo.dcs.commons.VertxWebHelper.Implicits.contentTypeToString
 import it.unibo.dcs.commons.VertxWebHelper._

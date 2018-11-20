@@ -8,6 +8,7 @@
 rootProject.name = 'distributed-chat-service'
 
 include 'dcs-commons'
+include 'dcs-test-commons'
 include 'dcs-data-access-commons'
 include 'dcs-service-commons'
 include 'dcs-interactor-commons'

@@ -2,7 +2,6 @@ package it.unibo.dcs.service.webapp.usecases
 
 import it.unibo.dcs.service.webapp.interaction.Requests.LoginUserRequest
 import it.unibo.dcs.service.webapp.interaction.Results.LoginResult
-import it.unibo.dcs.service.webapp.repositories.UserRepository
 import it.unibo.dcs.service.webapp.usecases.commons.Mocks._
 import it.unibo.dcs.service.webapp.usecases.commons.UseCaseSpec
 import rx.lang.scala.{Observable, Subscriber}

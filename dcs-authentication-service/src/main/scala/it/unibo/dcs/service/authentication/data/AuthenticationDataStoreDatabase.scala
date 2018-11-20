@@ -1,10 +1,9 @@
 package it.unibo.dcs.service.authentication.data
 
 import java.util.Date
-import io.vertx.core.{AsyncResult, Future}
+
 import io.vertx.lang.scala.json.Json
-import io.vertx.scala.ext.sql.{ResultSet, SQLConnection}
-import it.unibo.dcs.commons.VertxHelper
+import io.vertx.scala.ext.sql.SQLConnection
 import it.unibo.dcs.commons.dataaccess.DataStoreDatabase
 import it.unibo.dcs.commons.dataaccess.Implicits.dateToString
 import rx.lang.scala.Observable
@@ -12,10 +11,11 @@ import rx.lang.scala.Observable
 class AuthenticationDataStoreDatabase(private[this] val connection: SQLConnection)
   extends DataStoreDatabase(connection) with AuthenticationDataStore {
 
+  private val login = "SELECT * FROM `users` WHERE `username`=? AND `password`=?"
   private val insertUser = "INSERT INTO `users` (`username`, `password`) VALUES (?, ?);"
   private val deleteUser = "DELETE FROM `users` WHERE `username`=?"
   private val insertInvalidToken = "INSERT INTO `invalid_tokens` (`token`, `expiration_date`) VALUES (?, ?);"
-  private val apostrophe = "'"
+  private val checkToken = "SELECT * FROM `invalid_tokens` WHERE token = ?"
 
   override def createUser(username: String, password: String): Observable[Unit] =
     execute(insertUser, Json.arr(username, password))
@@ -23,49 +23,20 @@ class AuthenticationDataStoreDatabase(private[this] val connection: SQLConnectio
   override def deleteUser(username: String, token: String): Observable[Unit] =
     execute(deleteUser, Json.arr(username)).map(_ => invalidToken(token, new Date()))
 
-  override def checkUserExistence(username: String): Observable[Unit] =
-    checkRecordPresence("users", ("username", username))
-
   override def checkUserCredentials(username: String, password: String): Observable[Unit] =
-    checkRecordPresence("users", ("username", username), ("password", password))
+    query(login, Json.arr(username, password)).flatMap(resultSet => {
+      if(resultSet.getResults.isEmpty){
+        Observable.error(new IllegalStateException("Wrong credentials"))
+      } else {
+        Observable.just(Unit)
+      }
+    })
 
   override def invalidToken(token: String, expirationDate: Date): Observable[Unit] =
     execute(insertInvalidToken, Json.arr(token, dateToString(expirationDate)))
 
   override def isTokenValid(token: String): Observable[Boolean] =
-    checkResultSetSize("SELECT * FROM invalid_tokens WHERE token = '" + token + apostrophe, 0)
-
-  private def checkRecordPresence(table: String, parameters: (String, String)*): Observable[Unit] =
-    VertxHelper.toObservable[Unit] { handler => {
-      val clauses = parameters.map(param => param._1 + " = " + apostrophe + param._2 + apostrophe)
-        .fold("")((param1, param2) => param1 + " AND " + param2)
-      val query = ("SELECT * FROM " + table + " WHERE " + clauses).replaceFirst("AND", "")
-      connection.query(query, handleQueryResult(_, handler))
-      }
-    }
-
-  private def handleQueryResult(result: AsyncResult[ResultSet], handler: AsyncResult[Unit] => Unit): Unit = {
-    val resultFuture: Future[Unit] = Future.future()
-    if (result.succeeded() && result.result().getResults.nonEmpty) {
-      resultFuture.complete()
-    } else {
-      resultFuture.fail(result.cause())
-    }
-    handler(resultFuture)
-  }
-
-  private def checkResultSetSize(query: String, expectedSize: Int): Observable[Boolean] =
-    VertxHelper.toObservable[Boolean] { handler =>
-      connection.query(query, ar => {
-        val result: Future[Boolean] = Future.future()
-        if (ar.succeeded()) {
-          result.complete(ar.result().getResults.size == expectedSize)
-        } else {
-          result.fail(ar.cause())
-        }
-        handler(result)
-      })
-    }
+    query(checkToken, Json.arr(token)).map(_.getResults.isEmpty)
 
 }
 

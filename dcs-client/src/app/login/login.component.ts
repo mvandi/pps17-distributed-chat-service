@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../service/auth.service';
-import { LoginRequest } from '../requests';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '../service/auth.service';
+import {LoginRequest} from '../requests';
+import {Toast} from "../toast-notify";
 
 @Component({
   selector: 'app-login',
@@ -21,8 +22,9 @@ export class LoginComponent implements OnInit {
       user => console.log(user),
       err => {
         const error = err.error.error;
-        alert("Login failed! \n" + error.type);
         this.request.password = '';
+        Toast.toast("Login failed! \n" + error.type +
+          " error. \n Make sure to enter the correct credentials");
         console.error(err);
       },
       () => this.router.navigateByUrl('/')

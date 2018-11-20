@@ -9,3 +9,16 @@ final class DeleteRoomValidation(private[this] val threadExecutor: ThreadExecuto
                                  private[this] val postExecutionThread: PostExecutionThread,
                                  private[this] val validator: Validator[DeleteRoomRequest])
   extends Validation[DeleteRoomRequest](threadExecutor, postExecutionThread, validator)
+
+object DeleteRoomValidation {
+
+  /** Factory method to instantiate the class
+    *
+    * @param threadExecutor      thread executor that will perform the subscription
+    * @param postExecutionThread thread that will be notified of the subscription result
+    * @param validator           object containing the rules needed to validate
+    * @return an instantiation of the class */
+  def apply(threadExecutor: ThreadExecutor, postExecutionThread: PostExecutionThread,
+            validator: Validator[DeleteRoomRequest]): DeleteRoomValidation =
+    new DeleteRoomValidation(threadExecutor, postExecutionThread, validator)
+}

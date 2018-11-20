@@ -1,4 +1,4 @@
-import { ChatModule } from './chat.module';
+import {ChatModule} from './chat.module';
 
 describe('ChatModule', () => {
   let chatModule: ChatModule;

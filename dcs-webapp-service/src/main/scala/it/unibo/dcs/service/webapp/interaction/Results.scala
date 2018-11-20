@@ -6,7 +6,7 @@ import it.unibo.dcs.service.webapp.gson
 import it.unibo.dcs.service.webapp.interaction.Labels.JsonLabels.tokenLabel
 import it.unibo.dcs.service.webapp.model.{Message, Participation, Room, User}
 
-import scala.language.implicitConversions
+import scala.language.{implicitConversions, postfixOps}
 
 /** It wraps all results produced by the use cases executions. */
 object Results {
@@ -102,9 +102,6 @@ object Results {
 
     implicit def getMessagesToJsonArray(result: GetMessagesResult): JsonArray =
       gson toJsonArray result.messages
-
-    private def roomResultToJsonObject(result: Product): JsonObject =
-      Json.fromObjectString(gson.toJson(result))
 
   }
 

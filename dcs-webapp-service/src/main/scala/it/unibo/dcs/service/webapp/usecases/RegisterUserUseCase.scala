@@ -40,7 +40,7 @@ final class RegisterUserUseCase(private[this] val threadExecutor: ThreadExecutor
       }
       _ <- roomRepository.registerUser(request).onErrorResumeNext {
         case RoomServiceErrorException(error) =>
-          log.info("Rolling back auth and room it.unibo.dcs.service.webapp.repositories...")
+          log.info("Rolling back auth and room repository...")
           rollbackAuthRepository(request.username, token, error)
           rollbackUserRepository(request.username, error)
       }

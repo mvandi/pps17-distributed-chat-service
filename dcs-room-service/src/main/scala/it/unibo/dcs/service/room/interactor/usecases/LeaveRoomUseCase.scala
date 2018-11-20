@@ -18,3 +18,21 @@ class LeaveRoomUseCase (threadExecutor: ThreadExecutor,
     validation(request).flatMap(_ => roomRepository.leaveRoom(request))
 
 }
+
+/** Companion object */
+object LeaveRoomUseCase {
+
+  /** Factory method to create the use case
+    *
+    * @param threadExecutor      thread executor that will perform the subscription
+    * @param postExecutionThread thread that will be notified of the subscription result
+    * @param roomRepository      room repository reference
+    * @param validation          validation reference
+    * @return                    an instantiation of the class
+    */
+  def apply(threadExecutor: ThreadExecutor, postExecutionThread: PostExecutionThread,
+            roomRepository: RoomRepository, validation: LeaveRoomValidation): LeaveRoomUseCase = {
+    new LeaveRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+  }
+
+}

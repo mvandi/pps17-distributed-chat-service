@@ -7,8 +7,8 @@ import io.vertx.lang.scala.json.JsonObject
 import io.vertx.scala.ext.web.Router
 import io.vertx.scala.ext.web.handler.BodyHandler
 import it.unibo.dcs.commons.JsonHelper.Implicits.RichGson
-import it.unibo.dcs.commons.VertxWebHelper.getParam
 import it.unibo.dcs.commons.VertxWebHelper.Implicits.contentTypeToString
+import it.unibo.dcs.commons.VertxWebHelper.getParam
 import it.unibo.dcs.commons.interactor.ThreadExecutorExecutionContext
 import it.unibo.dcs.commons.interactor.executor.PostExecutionThread
 import it.unibo.dcs.commons.service.{HttpEndpointPublisher, ServiceVerticle}
@@ -45,33 +45,33 @@ final class RoomVerticle(private[this] val roomRepository: RoomRepository, val p
     val postExecutionThread = PostExecutionThread(RxHelper.scheduler(this.ctx))
 
     val createUserUseCase = {
-      val validation = new CreateUserValidation(threadExecutor, postExecutionThread, CreateUserValidator())
-      new CreateUserUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = CreateUserValidation(threadExecutor, postExecutionThread, CreateUserValidator())
+      CreateUserUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
     val getRoomsUseCase = {
-      val validation = new GetRoomsValidation(threadExecutor, postExecutionThread, GetRoomsValidator())
-      new GetRoomsUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = GetRoomsValidation(threadExecutor, postExecutionThread, GetRoomsValidator())
+      GetRoomsUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
     val createRoomUseCase = {
-      val validation = new CreateRoomValidation(threadExecutor, postExecutionThread, CreateRoomValidator())
-      new CreateRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = CreateRoomValidation(threadExecutor, postExecutionThread, CreateRoomValidator())
+      CreateRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
     val deleteRoomUseCase = {
-      val validation = new DeleteRoomValidation(threadExecutor, postExecutionThread, DeleteRoomValidator())
-      new DeleteRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = DeleteRoomValidation(threadExecutor, postExecutionThread, DeleteRoomValidator())
+      DeleteRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
     val joinRoomUseCase = {
-      val validation = new JoinRoomValidation(threadExecutor, postExecutionThread, JoinRoomValidator())
-      new JoinRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = JoinRoomValidation(threadExecutor, postExecutionThread, JoinRoomValidator())
+      JoinRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
     val sendMessageUseCase = {
-      val validation = new SendMessageValidation(threadExecutor, postExecutionThread, SendMessageValidator())
-      new SendMessageUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+    val validation = SendMessageValidation(threadExecutor, postExecutionThread, SendMessageValidator())
+      SendMessageUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
 
     val getMessagesUseCase = {
-      val validation = new GetMessagesValidation(threadExecutor, postExecutionThread, GetMessagesValidator())
-      new GetMessagesUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = GetMessagesValidation(threadExecutor, postExecutionThread, GetMessagesValidator())
+      GetMessagesUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
 
     router.post("/users")
@@ -84,19 +84,18 @@ final class RoomVerticle(private[this] val roomRepository: RoomRepository, val p
       })
 
     val leaveRoomUseCase = {
-      val validation = new LeaveRoomValidation(threadExecutor, postExecutionThread, LeaveRoomValidator())
-      new LeaveRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = LeaveRoomValidation(threadExecutor, postExecutionThread, LeaveRoomValidator())
+      LeaveRoomUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
 
     val getRoomParticipationsUseCase = {
-      val validation = new GetRoomParticipationsValidation(threadExecutor, postExecutionThread,
-        GetRoomParticipationsValidator())
-      new GetRoomParticipationsUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = GetRoomParticipationsValidation(threadExecutor, postExecutionThread, GetRoomParticipationsValidator())
+      GetRoomParticipationsUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
     
     val getUserParticipationsUseCase = {
-      val validation = new GetUserParticipationsValidation(threadExecutor, postExecutionThread, GetUserParticipationsValidator())
-      new GetUserParticipationsUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
+      val validation = GetUserParticipationsValidation(threadExecutor, postExecutionThread, GetUserParticipationsValidator())
+      GetUserParticipationsUseCase(threadExecutor, postExecutionThread, roomRepository, validation)
     }
 
     router.post("/users")

@@ -18,7 +18,7 @@ drop table if exists participations;
 create table participations (
      username varchar(20) not null,
      `name` varchar(50) not null,
-     join_date date not null default CURRENT_TIMESTAMP,
+     join_date timestamp not null default CURRENT_TIMESTAMP,
      constraint id_participation primary key (username, `name`));
 
 drop table if exists rooms;
@@ -35,10 +35,10 @@ create table users (
 -- Constraints Section
 -- ___________________ 
 
-alter table messages add constraint FKPM
-     foreign key (username, `name`)
-     references participations (username, `name`)
-     on delete cascade;
+-- alter table messages add constraint FKPM
+--     foreign key (username, `name`)
+--     references participations (username, `name`)
+--     on delete cascade;
 
 alter table participations add constraint FKPR
      foreign key (`name`)

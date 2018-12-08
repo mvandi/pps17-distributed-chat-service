@@ -26,7 +26,7 @@ final class HttpEndpointDiscoveryImpl(private[this] val discovery: ServiceDiscov
             val record = message.body
             if (record.getName == name && record.getType == RECORD_TYPE) {
               val webClient = discovery.getReference(record).getAs(classOf[JWebClient])
-              handler(Future.succeededFuture(webClient))
+              handler(webClient)
               consumer.unregister()
             }
           }

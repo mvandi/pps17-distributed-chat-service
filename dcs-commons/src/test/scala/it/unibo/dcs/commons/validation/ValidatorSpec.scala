@@ -29,7 +29,7 @@ final class ValidatorSpec extends JUnitSpec {
     validator.validate("mvandi").subscribe()
   }
 
-  it should "not IllegalStateException since builder has already been built" in {
+  it should "throw IllegalStateException since builder has already been built" in {
     var builder: ValidatorBuilder[String] = null
 
     Validator[String] { b =>
